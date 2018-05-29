@@ -81,6 +81,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_tambahMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_tambahMouseExited(evt);
             }
@@ -92,6 +95,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
         btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cancelMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_cancelMouseExited(evt);
             }
@@ -103,6 +109,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_edit.png"))); // NOI18N
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_editMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_editMouseExited(evt);
             }
@@ -233,6 +242,36 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_cancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseEntered
         btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
     }//GEN-LAST:event_btn_cancelMouseEntered
+
+    private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
+        btn_tambah.setVisible(false);
+        btn_edit.setVisible(false);
+        btn_hapus.setVisible(false);
+        btn_refresh.setVisible(false);
+        
+        btn_save.setVisible(true);
+        btn_cancel.setVisible(true);
+    }//GEN-LAST:event_btn_tambahMouseClicked
+
+    private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
+        btn_tambah.setVisible(false);
+        btn_edit.setVisible(false);
+        btn_hapus.setVisible(false);
+        btn_refresh.setVisible(false);
+        
+        btn_save.setVisible(true);
+        btn_cancel.setVisible(true); 
+    }//GEN-LAST:event_btn_editMouseClicked
+
+    private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
+        btn_tambah.setVisible(true);
+        btn_edit.setVisible(true);
+        btn_hapus.setVisible(true);
+        btn_refresh.setVisible(true);
+        
+        btn_save.setVisible(false);
+        btn_cancel.setVisible(false);
+    }//GEN-LAST:event_btn_cancelMouseClicked
 
     /**
      * @param args the command line arguments
