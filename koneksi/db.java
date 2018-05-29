@@ -1,4 +1,3 @@
-
 package koneksi;
 
 import java.sql.Connection;
@@ -7,14 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class db {
+
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
 
     public Connection connect() {
-        if (conn==null){
+        if (conn == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 try {
@@ -37,12 +36,12 @@ public class db {
         return rs;
     }
 
-    public boolean exe(String query, boolean kategori){
+    public boolean exe(String query, boolean kategori) {
         try {
             ps = conn.prepareStatement(query);
-            if(kategori){
+            if (kategori) {
                 rs = ps.executeQuery(); //select
-            }else{
+            } else {
                 ps.executeUpdate(); //insert, update, delete
             }
             return true;

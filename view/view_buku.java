@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+
 import java.awt.Color;
 import entity.ent_buku;
 import factory.factory;
@@ -12,8 +13,9 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 /**
- * 
+ *
  *
  * @author xzan
  */
@@ -22,70 +24,88 @@ public class view_buku extends javax.swing.JFrame {
     private int baris;
     private String proses;
     private boolean status;
-    private DefaultTableModel dtmbk;
+    private DefaultTableModel model;
     private String[] tabelHeader;
     private int_buku bukuDAO;
     private List<ent_buku> listBuku;
     private ent_buku b;
-    
+
     private void enable_text(boolean status) {
-        judul.setEditable(status);  
-	kategori.setEditable(status);  
-	penerbit.setEnabled(status);  
-	stok.setEnabled(status);  
+        judul.setEditable(status);
+        kategori.setEditable(status);
+        penerbit.setEnabled(status);
+        stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
     }
 
-    private void refreshIsiTabel() {
-       listBuku = bukuDAO.getBuku(cari.getText());
-       dtmbk = (DefaultTableModel) tbl_buku.getModel();
-       dtmbk.setRowCount(0);
+    private void button_default(boolean status) {
+        btn_tambah.setVisible(status);
+        btn_edit.setVisible(status);
+        btn_hapus.setVisible(status);
+        btn_refresh.setVisible(status);
 
-        for(ent_buku data : listBuku) {
-            dtmbk.addRow(new Object[] {
-              data.getJudul(),
-              data.getKategori(), 
-              data.getPenerbit(), 
-              data.getStok()
+        btn_save.setVisible(!status);
+        btn_cancel.setVisible(!status);
+    }
+
+    private void clear_text() {
+        judul.setText("");
+        kategori.setText("");
+        penerbit.setText("");
+        stok.setText("");
+        cari.setText("");
+    }
+
+    private void refresh_table() {
+        listBuku = bukuDAO.getBuku(cari.getText());
+        model = (DefaultTableModel) tbl_buku.getModel();
+        model.setRowCount(0);
+
+        for (ent_buku data : listBuku) {
+            model.addRow(new Object[]{
+                data.getJudul(),
+                data.getKategori(),
+                data.getPenerbit(),
+                data.getStok()
             });
-         }
-               
-       if (tbl_buku.getRowCount() > 0) {
-	baris = tbl_buku.getRowCount() -1;
-	tbl_buku.setRowSelectionInterval (baris, baris);
-	
-	proses = "";
+        }
+
+        if (tbl_buku.getRowCount() > 0) {
+            baris = tbl_buku.getRowCount() - 1;
+            tbl_buku.setRowSelectionInterval(baris, baris);
+
+            proses = "";
         }
 
     }
-    
-        public view_buku() {
+
+    public view_buku() {
         initComponents();
-            enable_text(false);
+        enable_text(false);
 //        btn_edit.setVisible(false);
 //        btn_tambah.setVisible(false);
-          btn_cancel.setVisible(false);
-          btn_save.setVisible(false);
-          
-          bukuDAO = factory.getBukuDA0();
-          tabelHeader = new String[] {"Judul", "Kategori", "Penerbit", "Stok"};
-          dtmbk = new DefaultTableModel (null, tabelHeader);
-          tbl_buku.setModel(dtmbk);
-          tbl_buku.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+        btn_cancel.setVisible(false);
+        btn_save.setVisible(false);
 
-          public void valueChanged(ListSelectionEvent e) {
-            baris = tbl_buku.getSelectedRow();
-            if (baris >= 0) {
-		judul.setText(dtmbk.getValueAt(baris, 0) .toString()); 
-		penerbit.setText(dtmbk.getValueAt(baris, 1) .toString());
-		kategori.setText(dtmbk.getValueAt (baris, 2) .toString());
-                stok.setText(dtmbk.getValueAt (baris, 3) .toString());
-	
+        bukuDAO = factory.getBukuDA0();
+        tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
+        model = new DefaultTableModel(null, tabelHeader);
+        tbl_buku.setModel(model);
+        tbl_buku.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent e) {
+                baris = tbl_buku.getSelectedRow();
+                if (baris >= 0) {
+                    judul.setText(model.getValueAt(baris, 0).toString());
+                    penerbit.setText(model.getValueAt(baris, 1).toString());
+                    kategori.setText(model.getValueAt(baris, 2).toString());
+                    stok.setText(model.getValueAt(baris, 3).toString());
+
                 }
             }
-           });
-        
-          refreshIsiTabel();
+        });
+
+        refresh_table();
     }
 
     /**
@@ -313,47 +333,25 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        btn_tambah.setVisible(false);
-        btn_edit.setVisible(false);
-        btn_hapus.setVisible(false);
-        btn_refresh.setVisible(false);
-        
-        btn_save.setVisible(true);
-        btn_cancel.setVisible(true);
+        button_default(false);
         enable_text(true);
-        
-        judul.setText("");
-        kategori.setText("");
-        penerbit.setText("");
-        stok.setText("");
+        clear_text();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
-        btn_tambah.setVisible(false);
-        btn_edit.setVisible(false);
-        btn_hapus.setVisible(false);
-        btn_refresh.setVisible(false);
-        
-        btn_save.setVisible(true);
-        btn_cancel.setVisible(true); 
+        button_default(false);
         enable_text(true);
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
-        btn_tambah.setVisible(true);
-        btn_edit.setVisible(true);
-        btn_hapus.setVisible(true);
-        btn_refresh.setVisible(true);
-        
-        btn_save.setVisible(false);
-        btn_cancel.setVisible(false);
+        button_default(true);
         enable_text(false);
-        
-        refreshIsiTabel();
+
+        refresh_table();
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
-        refreshIsiTabel();
+        refresh_table();
     }//GEN-LAST:event_cariKeyReleased
 
     /**

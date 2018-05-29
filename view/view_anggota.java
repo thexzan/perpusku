@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package view;
+
 import java.awt.Color;
+
 /**
- * 
+ *
  *
  * @author xzan
  */
@@ -19,9 +21,9 @@ public class view_anggota extends javax.swing.JFrame {
         initComponents();
 //        btn_edit.setVisible(false);
 //        btn_tambah.setVisible(false);
-          btn_cancel.setVisible(false);
-          btn_save.setVisible(false);
-        
+        btn_cancel.setVisible(false);
+        btn_save.setVisible(false);
+
     }
 
     /**
@@ -256,14 +258,14 @@ public class view_anggota extends javax.swing.JFrame {
         btn_edit.setVisible(false);
         btn_hapus.setVisible(false);
         btn_refresh.setVisible(false);
-        
+
         btn_save.setVisible(true);
         btn_cancel.setVisible(true);
-                
+
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
-        
+
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
@@ -271,7 +273,7 @@ public class view_anggota extends javax.swing.JFrame {
         btn_edit.setVisible(true);
         btn_hapus.setVisible(true);
         btn_refresh.setVisible(true);
-        
+
         btn_save.setVisible(false);
         btn_cancel.setVisible(false);
     }//GEN-LAST:event_btn_cancelMouseClicked
@@ -281,9 +283,9 @@ public class view_anggota extends javax.swing.JFrame {
         btn_edit.setVisible(false);
         btn_hapus.setVisible(false);
         btn_refresh.setVisible(false);
-        
+
         btn_save.setVisible(true);
-        btn_cancel.setVisible(true); 
+        btn_cancel.setVisible(true);
     }//GEN-LAST:event_btn_editMouseClicked
 
     /**
