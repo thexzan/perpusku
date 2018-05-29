@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package interfaces;
-import entity.ent_buku;
+//import entity.ent_buku;
 import java.util.List;
 
 /**
@@ -12,8 +12,8 @@ import java.util.List;
  * @author xzan
  */
 public interface int_buku {
-    boolean insertBuku (ent_buku b);
-    boolean updateBuku (ent_buku b);
-    boolean deleteBuku (int id);
+//    boolean insertBuku (ent_buku b);
+//    boolean updateBuku (ent_buku b);
+//    boolean deleteBuku (int id);
     List getBuku(String cari);
 }

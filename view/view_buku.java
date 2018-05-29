@@ -5,6 +5,13 @@
  */
 package view;
 import java.awt.Color;
+import entity.ent_buku;
+import factory.factory;
+import interfaces.int_buku;
+import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 /**
  * 
  *
@@ -12,16 +19,73 @@ import java.awt.Color;
  */
 public class view_buku extends javax.swing.JFrame {
 
-    /**
-     * Creates new form view_anggota
-     */
-    public view_buku() {
+    private int baris;
+    private String proses;
+    private boolean status;
+    private DefaultTableModel dtmbk;
+    private String[] tabelHeader;
+    private int_buku bukuDAO;
+    private List<ent_buku> listBuku;
+    private ent_buku b;
+    
+    private void enable_text(boolean status) {
+        judul.setEditable(status);  
+	kategori.setEditable(status);  
+	penerbit.setEnabled(status);  
+	stok.setEnabled(status);  
+        tbl_buku.setEnabled(!status);
+    }
+
+    private void refreshIsiTabel() {
+       listBuku = bukuDAO.getBuku(cari.getText());
+       dtmbk = (DefaultTableModel) tbl_buku.getModel();
+       dtmbk.setRowCount(0);
+
+        for(ent_buku data : listBuku) {
+            dtmbk.addRow(new Object[] {
+              data.getJudul(),
+              data.getKategori(), 
+              data.getPenerbit(), 
+              data.getStok()
+            });
+         }
+               
+       if (tbl_buku.getRowCount() > 0) {
+	baris = tbl_buku.getRowCount() -1;
+	tbl_buku.setRowSelectionInterval (baris, baris);
+	
+	proses = "";
+        }
+
+    }
+    
+        public view_buku() {
         initComponents();
+            enable_text(false);
 //        btn_edit.setVisible(false);
 //        btn_tambah.setVisible(false);
           btn_cancel.setVisible(false);
           btn_save.setVisible(false);
+          
+          bukuDAO = factory.getBukuDA0();
+          tabelHeader = new String[] {"Judul", "Kategori", "Penerbit", "Stok"};
+          dtmbk = new DefaultTableModel (null, tabelHeader);
+          tbl_buku.setModel(dtmbk);
+          tbl_buku.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+
+          public void valueChanged(ListSelectionEvent e) {
+            baris = tbl_buku.getSelectedRow();
+            if (baris >= 0) {
+		judul.setText(dtmbk.getValueAt(baris, 0) .toString()); 
+		penerbit.setText(dtmbk.getValueAt(baris, 1) .toString());
+		kategori.setText(dtmbk.getValueAt (baris, 2) .toString());
+                stok.setText(dtmbk.getValueAt (baris, 3) .toString());
+	
+                }
+            }
+           });
         
+          refreshIsiTabel();
     }
 
     /**
@@ -187,6 +251,11 @@ public class view_buku extends javax.swing.JFrame {
         cari.setBorder(null);
         cari.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         cari.setSelectionColor(new java.awt.Color(0, 84, 129));
+        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariKeyReleased(evt);
+            }
+        });
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 80, 165, 30));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_bubku.png"))); // NOI18N
@@ -251,6 +320,12 @@ public class view_buku extends javax.swing.JFrame {
         
         btn_save.setVisible(true);
         btn_cancel.setVisible(true);
+        enable_text(true);
+        
+        judul.setText("");
+        kategori.setText("");
+        penerbit.setText("");
+        stok.setText("");
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
@@ -261,6 +336,7 @@ public class view_buku extends javax.swing.JFrame {
         
         btn_save.setVisible(true);
         btn_cancel.setVisible(true); 
+        enable_text(true);
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
@@ -271,7 +347,14 @@ public class view_buku extends javax.swing.JFrame {
         
         btn_save.setVisible(false);
         btn_cancel.setVisible(false);
+        enable_text(false);
+        
+        refreshIsiTabel();
     }//GEN-LAST:event_btn_cancelMouseClicked
+
+    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        refreshIsiTabel();
+    }//GEN-LAST:event_cariKeyReleased
 
     /**
      * @param args the command line arguments
