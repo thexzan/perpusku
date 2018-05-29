@@ -20,6 +20,10 @@ public class view_anggota extends javax.swing.JFrame {
      */
     public view_anggota() {
         initComponents();
+//        btn_edit.setVisible(false);
+//        btn_tambah.setVisible(false);
+          btn_cancel.setVisible(false);
+          btn_save.setVisible(false);
         
     }
 
@@ -32,8 +36,11 @@ public class view_anggota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_save = new javax.swing.JLabel();
         btn_tambah = new javax.swing.JLabel();
+        btn_cancel = new javax.swing.JLabel();
         btn_edit = new javax.swing.JLabel();
+        btn_refresh = new javax.swing.JLabel();
         btn_hapus = new javax.swing.JLabel();
         tbl_anggota = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -50,6 +57,17 @@ public class view_anggota extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(640, 620));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
+        btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_saveMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_saveMouseEntered(evt);
+            }
+        });
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -61,6 +79,17 @@ public class view_anggota extends javax.swing.JFrame {
         });
         getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
 
+        btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
+        btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_cancelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_cancelMouseEntered(evt);
+            }
+        });
+        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_edit.png"))); // NOI18N
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -71,6 +100,17 @@ public class view_anggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+
+        btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
+        btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseEntered(evt);
+            }
+        });
+        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 426, 60, -1));
 
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,6 +218,30 @@ public class view_anggota extends javax.swing.JFrame {
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete_hover.png")));
     }//GEN-LAST:event_btn_hapusMouseEntered
 
+    private void btn_refreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseExited
+        btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png")));
+    }//GEN-LAST:event_btn_refreshMouseExited
+
+    private void btn_refreshMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseEntered
+        btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
+    }//GEN-LAST:event_btn_refreshMouseEntered
+
+    private void btn_saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseExited
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png")));
+    }//GEN-LAST:event_btn_saveMouseExited
+
+    private void btn_saveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseEntered
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save_hover.png")));
+    }//GEN-LAST:event_btn_saveMouseEntered
+
+    private void btn_cancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseExited
+        btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png")));
+    }//GEN-LAST:event_btn_cancelMouseExited
+
+    private void btn_cancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseEntered
+        btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
+    }//GEN-LAST:event_btn_cancelMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -216,8 +280,11 @@ public class view_anggota extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane alamat;
     private javax.swing.JLabel bg;
+    private javax.swing.JLabel btn_cancel;
     private javax.swing.JLabel btn_edit;
     private javax.swing.JLabel btn_hapus;
+    private javax.swing.JLabel btn_refresh;
+    private javax.swing.JLabel btn_save;
     private javax.swing.JLabel btn_tambah;
     private javax.swing.JTextField cari;
     private javax.swing.JTable jTable1;
