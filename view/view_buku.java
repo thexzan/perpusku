@@ -10,12 +10,10 @@ import java.awt.Color;
  *
  * @author xzan
  */
-public class view_anggota extends javax.swing.JFrame {
+public class view_buku extends javax.swing.JFrame {
 
-    /**
-     * Creates new form view_anggota
-     */
-    public view_anggota() {
+
+    public view_buku() {
         initComponents();
 //        btn_edit.setVisible(false);
 //        btn_tambah.setVisible(false);
