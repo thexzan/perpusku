@@ -12,7 +12,9 @@ import java.awt.Color;
  */
 public class view_buku extends javax.swing.JFrame {
 
-
+    /**
+     * Creates new form view_anggota
+     */
     public view_buku() {
         initComponents();
 //        btn_edit.setVisible(false);
@@ -31,6 +33,8 @@ public class view_buku extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        kategori = new javax.swing.JTextField();
+        stok = new javax.swing.JTextField();
         btn_save = new javax.swing.JLabel();
         btn_tambah = new javax.swing.JLabel();
         btn_cancel = new javax.swing.JLabel();
@@ -38,19 +42,31 @@ public class view_buku extends javax.swing.JFrame {
         btn_refresh = new javax.swing.JLabel();
         btn_hapus = new javax.swing.JLabel();
         tbl_anggota = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        nama = new javax.swing.JTextField();
-        telpon = new javax.swing.JTextField();
-        alamat = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        tbl_buku = new javax.swing.JTable();
+        judul = new javax.swing.JTextField();
+        penerbit = new javax.swing.JTextField();
         cari = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(640, 620));
         setMinimumSize(new java.awt.Dimension(640, 620));
-        setPreferredSize(new java.awt.Dimension(640, 620));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        kategori.setBackground(new Color(0,0,0,0));
+        kategori.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        kategori.setForeground(new java.awt.Color(128, 128, 128));
+        kategori.setBorder(null);
+        kategori.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        kategori.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 450, 220, 30));
+
+        stok.setBackground(new Color(0,0,0,0));
+        stok.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        stok.setForeground(new java.awt.Color(128, 128, 128));
+        stok.setBorder(null);
+        stok.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        stok.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 518, 220, 30));
 
         btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,8 +138,8 @@ public class view_buku extends javax.swing.JFrame {
         tbl_anggota.setBorder(null);
         tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
 
-        jTable1.setForeground(new java.awt.Color(51, 51, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_buku.setForeground(new java.awt.Color(51, 51, 51));
+        tbl_buku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"TEST", "TEST", null, null},
                 {"TEST", "TEST", null, null},
@@ -134,46 +150,27 @@ public class view_buku extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tbl_anggota.setViewportView(jTable1);
+        tbl_buku.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tbl_buku.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tbl_anggota.setViewportView(tbl_buku);
 
         getContentPane().add(tbl_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 205));
 
-        nama.setBackground(new Color(0,0,0,0));
-        nama.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        nama.setForeground(new java.awt.Color(128, 128, 128));
-        nama.setBorder(null);
-        nama.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        nama.setSelectionColor(new java.awt.Color(0, 122, 255));
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 450, 220, 30));
+        judul.setBackground(new Color(0,0,0,0));
+        judul.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        judul.setForeground(new java.awt.Color(128, 128, 128));
+        judul.setBorder(null);
+        judul.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        judul.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(judul, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 450, 220, 30));
 
-        telpon.setBackground(new Color(0,0,0,0));
-        telpon.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        telpon.setForeground(new java.awt.Color(128, 128, 128));
-        telpon.setBorder(null);
-        telpon.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        telpon.setSelectionColor(new java.awt.Color(0, 122, 255));
-        getContentPane().add(telpon, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 518, 220, 30));
-
-        alamat.setBackground(new java.awt.Color(255, 51, 51));
-        alamat.setBorder(null);
-        alamat.setForeground(new java.awt.Color(102, 204, 0));
-        alamat.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        alamat.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(128, 128, 128));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
-        jTextArea1.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        jTextArea1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        alamat.setViewportView(jTextArea1);
-
-        getContentPane().add(alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 450, 230, 100));
+        penerbit.setBackground(new Color(0,0,0,0));
+        penerbit.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        penerbit.setForeground(new java.awt.Color(128, 128, 128));
+        penerbit.setBorder(null);
+        penerbit.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        penerbit.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(penerbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 518, 220, 30));
 
         cari.setBackground(new Color(0,0,0,0));
         cari.setFont(new java.awt.Font("Osaka", 0, 18)); // NOI18N
@@ -183,7 +180,7 @@ public class view_buku extends javax.swing.JFrame {
         cari.setSelectionColor(new java.awt.Color(0, 84, 129));
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 80, 165, 30));
 
-        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_anggota.png"))); // NOI18N
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_bubku.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -254,26 +251,26 @@ public class view_buku extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view_anggota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view_anggota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view_anggota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view_anggota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_buku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new view_anggota().setVisible(true);
+                new view_buku().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane alamat;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel btn_cancel;
     private javax.swing.JLabel btn_edit;
@@ -282,10 +279,11 @@ public class view_buku extends javax.swing.JFrame {
     private javax.swing.JLabel btn_save;
     private javax.swing.JLabel btn_tambah;
     private javax.swing.JTextField cari;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField nama;
+    private javax.swing.JTextField judul;
+    private javax.swing.JTextField kategori;
+    private javax.swing.JTextField penerbit;
+    private javax.swing.JTextField stok;
     private javax.swing.JScrollPane tbl_anggota;
-    private javax.swing.JTextField telpon;
+    private javax.swing.JTable tbl_buku;
     // End of variables declaration//GEN-END:variables
 }

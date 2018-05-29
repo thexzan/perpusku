@@ -39,8 +39,8 @@ public class view_anggota extends javax.swing.JFrame {
         btn_edit = new javax.swing.JLabel();
         btn_refresh = new javax.swing.JLabel();
         btn_hapus = new javax.swing.JLabel();
-        tbl_anggota = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        scrol = new javax.swing.JScrollPane();
+        tbl_anggota = new javax.swing.JTable();
         nama = new javax.swing.JTextField();
         telpon = new javax.swing.JTextField();
         alamat = new javax.swing.JScrollPane();
@@ -120,12 +120,12 @@ public class view_anggota extends javax.swing.JFrame {
         });
         getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 346, 60, -1));
 
-        tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
-        tbl_anggota.setBorder(null);
-        tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
+        scrol.setBackground(new java.awt.Color(102, 255, 102));
+        scrol.setBorder(null);
+        scrol.setForeground(new java.awt.Color(204, 51, 255));
 
-        jTable1.setForeground(new java.awt.Color(51, 51, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_anggota.setForeground(new java.awt.Color(51, 51, 51));
+        tbl_anggota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"TEST", "TEST", null, null},
                 {"TEST", "TEST", null, null},
@@ -136,11 +136,11 @@ public class view_anggota extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tbl_anggota.setViewportView(jTable1);
+        tbl_anggota.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tbl_anggota.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        scrol.setViewportView(tbl_anggota);
 
-        getContentPane().add(tbl_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 205));
+        getContentPane().add(scrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 205));
 
         nama.setBackground(new Color(0,0,0,0));
         nama.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
@@ -284,10 +284,10 @@ public class view_anggota extends javax.swing.JFrame {
     private javax.swing.JLabel btn_save;
     private javax.swing.JLabel btn_tambah;
     private javax.swing.JTextField cari;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField nama;
-    private javax.swing.JScrollPane tbl_anggota;
+    private javax.swing.JScrollPane scrol;
+    private javax.swing.JTable tbl_anggota;
     private javax.swing.JTextField telpon;
     // End of variables declaration//GEN-END:variables
 }
