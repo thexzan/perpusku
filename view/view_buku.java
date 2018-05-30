@@ -393,11 +393,11 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
-        if (JOptionPane.showConfirmDialog(null,"Yakin ingin menghapus?","Konfirmasi",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             status = bukuDAO.deleteBuku(judul.getText());
 
-            if (status == false){
-                JOptionPane.showMessageDialog(null, "Gagal menghapus data!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            if (status == false) {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
