@@ -45,7 +45,9 @@ public class db {
                 ps.executeUpdate(); //insert, update, delete
             }
             return true;
-        } catch (Exception e) {
+        }catch(SQLException e) {
+            System.out.println("QUERY ERROR == " + e);
+            System.exit(0);
             return false;
         }
     }
