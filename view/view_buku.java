@@ -367,9 +367,11 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
-        default_button(true);
-        enable_text(false);
-        refresh_table();
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin Cancel?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            default_button(true);
+            enable_text(false);
+            refresh_table();
+        }
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
