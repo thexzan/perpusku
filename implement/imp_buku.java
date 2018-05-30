@@ -40,7 +40,10 @@ public class imp_buku implements int_buku {
 
     @Override
     public boolean updateBuku(ent_buku b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        status = false;
+        query = "UPDATE buku SET judul='"+b.getJudul()+"','"+b.getKategori()+"','"+b.getPenerbit()+"','"+b.getStok()+"' WHERE judul='"+b.getJudul()+"'  ";
+        status = db.exe(query, false);
+        return status;
     }
 
     @Override
