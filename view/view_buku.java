@@ -38,6 +38,9 @@ public class view_buku extends javax.swing.JFrame {
         stok.setEditable(status);
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
+        
+        cari.setEnabled(!status);
+        cari.setEditable(!status);
         judul.setEnabled(false);
         judul.setEditable(false);
     }
@@ -401,6 +404,7 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
         cari.setText("");
         refresh_table();
+       
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
