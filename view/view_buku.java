@@ -398,6 +398,7 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_saveMouseClicked
 
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
+        cari.setText("");
         refresh_table();
     }//GEN-LAST:event_btn_refreshMouseClicked
 
