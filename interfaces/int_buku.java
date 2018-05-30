@@ -12,8 +12,8 @@ import java.util.List;
  * @author xzan
  */
 public interface int_buku {
-    boolean insertBuku (ent_buku b);
-    boolean updateBuku (ent_buku b);
-    boolean deleteBuku (String judul);
-    List getBuku(String cari);
+    boolean insert(ent_buku b);
+    boolean update(ent_buku b);
+    boolean delete(String judul);
+    List get(String cari);
 }

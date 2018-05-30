@@ -31,7 +31,7 @@ public class imp_buku implements int_buku {
     }
 
     @Override
-    public boolean insertBuku(ent_buku b) {
+    public boolean insert(ent_buku b) {
         status = false;
         query = "INSERT INTO buku VALUES (NULL,'"+b.getJudul()+"','"+b.getKategori()+"','"+b.getPenerbit()+"','"+b.getStok()+"')";
         status = db.exe(query, false);
@@ -39,7 +39,7 @@ public class imp_buku implements int_buku {
     }
 
     @Override
-    public boolean updateBuku(ent_buku b) {
+    public boolean update(ent_buku b) {
         status = false;
         query = "UPDATE buku SET judul='"+b.getJudul()+"',kategori='"+b.getKategori()+"',penerbit='"+b.getPenerbit()+"',stok='"+b.getStok()+"' WHERE judul='"+b.getJudul()+"'";
         status = db.exe(query, false);
@@ -47,7 +47,7 @@ public class imp_buku implements int_buku {
     }
 
     @Override
-    public boolean deleteBuku(String judul) {
+    public boolean delete(String judul) {
         status = false;
         query = "DELETE FROM buku WHERE judul ='"+judul+"'";
         status = db.exe(query, false);
@@ -55,7 +55,7 @@ public class imp_buku implements int_buku {
     }
     
     @Override
-    public List getBuku(String cari) {
+    public List get(String cari) {
         query = "SELECT * FROM buku WHERE judul like '%" + cari + "%' or kategori like '%" + cari + "%' or penerbit like '%" + cari + "%' order by id";
         status = db.exe(query, true);
         if (status) {
