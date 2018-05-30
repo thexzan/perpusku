@@ -10,6 +10,7 @@ import entity.ent_buku;
 import factory.factory;
 import interfaces.int_buku;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class view_buku extends javax.swing.JFrame {
 
     private int baris;
-    private String proses;
+    private String action;
     private boolean status;
     private DefaultTableModel model;
     private String[] tabelHeader;
@@ -74,7 +75,7 @@ public class view_buku extends javax.swing.JFrame {
             baris = tbl_buku.getRowCount() - 1;
             tbl_buku.setRowSelectionInterval(baris, baris);
 
-            proses = "";
+            action = "";
         }
 
     }
@@ -154,6 +155,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_saveMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_saveMouseExited(evt);
             }
@@ -207,6 +211,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
         btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_refreshMouseExited(evt);
             }
@@ -336,11 +343,15 @@ public class view_buku extends javax.swing.JFrame {
         button_default(false);
         enable_text(true);
         clear_text();
+        action = "INSERT";
+        judul.requestFocus();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
         button_default(false);
         enable_text(true);
+        action = "UPDATE";
+        judul.requestFocus();
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
@@ -353,6 +364,31 @@ public class view_buku extends javax.swing.JFrame {
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
         refresh_table();
     }//GEN-LAST:event_cariKeyReleased
+
+    private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+        b = new ent_buku();
+        b.setJudul(judul.getText());
+        b.setKategori(kategori.getText());
+        b.setPenerbit(penerbit.getText());
+        b.setStok(Integer.parseInt(stok.getText()));
+
+        if (action.equalsIgnoreCase("INSERT")) {
+            status = bukuDAO.insertBuku(b);
+        }else {
+            status = bukuDAO.updateBuku(b);
+        }
+        if (status == false) {
+            JOptionPane.showMessageDialog(null, "Data gagal disimpan",
+                    "Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }
+        refresh_table();
+        enable_text(false);
+        button_default(true);
+    }//GEN-LAST:event_btn_saveMouseClicked
+
+    private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
+        refresh_table();
+    }//GEN-LAST:event_btn_refreshMouseClicked
 
     /**
      * @param args the command line arguments

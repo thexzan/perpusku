@@ -30,16 +30,19 @@ public class imp_buku implements int_buku {
         db.connect();
     }
 
-//    @Override
-//    public boolean insertBuku(ent_buku b) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public boolean updateBuku(ent_buku b) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
+    @Override
+    public boolean insertBuku(ent_buku b) {
+        status = false;
+        query = "INSERT INTO buku VALUES (NULL,'"+b.getJudul()+"','"+b.getKategori()+"','"+b.getPenerbit()+"','"+b.getStok()+"')";
+        status = db.exe(query, false);
+        return status;
+    }
+
+    @Override
+    public boolean updateBuku(ent_buku b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 //    @Override
 //    public boolean deleteBuku(int id) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
