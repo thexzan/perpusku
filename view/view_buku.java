@@ -45,7 +45,7 @@ public class view_buku extends javax.swing.JFrame {
         judul.setEditable(false);
     }
 
-    private void button_default(boolean status) {
+    private void default_button(boolean status) {
         btn_tambah.setVisible(status);
         btn_edit.setVisible(status);
         btn_hapus.setVisible(status);
@@ -211,6 +211,12 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
         btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_refreshMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_refreshMouseClicked(evt);
             }
@@ -343,7 +349,7 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        button_default(false);
+        default_button(false);
         enable_text(true);
         clear_text();
         action = "INSERT";
@@ -354,14 +360,14 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
-        button_default(false);
+        default_button(false);
         enable_text(true);
         action = "UPDATE";
         kategori.requestFocus();
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
-        button_default(true);
+        default_button(true);
         enable_text(false);
         refresh_table();
     }//GEN-LAST:event_btn_cancelMouseClicked
@@ -388,12 +394,11 @@ public class view_buku extends javax.swing.JFrame {
                     status = bukuDAO.update(b);
                 }
                 if (status == false) {
-                    JOptionPane.showMessageDialog(null, "Data gagal disimpan",
-                            "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Data gagal disimpan","Informasi", JOptionPane.INFORMATION_MESSAGE);
                 }
                 refresh_table();
                 enable_text(false);
-                button_default(true);
+                default_button(true);
             }
 
         } catch (NumberFormatException e) {
@@ -418,6 +423,14 @@ public class view_buku extends javax.swing.JFrame {
 
         refresh_table();
     }//GEN-LAST:event_btn_hapusMouseClicked
+
+    private void btn_refreshMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMousePressed
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_pressed.png")));
+    }//GEN-LAST:event_btn_refreshMousePressed
+
+    private void btn_refreshMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseReleased
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
+    }//GEN-LAST:event_btn_refreshMouseReleased
 
     /**
      * @param args the command line arguments
