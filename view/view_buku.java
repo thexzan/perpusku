@@ -94,17 +94,14 @@ public class view_buku extends javax.swing.JFrame {
         tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
         model = new DefaultTableModel(null, tabelHeader);
         tbl_buku.setModel(model);
-        tbl_buku.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-            public void valueChanged(ListSelectionEvent e) {
-                baris = tbl_buku.getSelectedRow();
-                if (baris >= 0) {
-                    judul.setText(model.getValueAt(baris, 0).toString());
-                    penerbit.setText(model.getValueAt(baris, 1).toString());
-                    kategori.setText(model.getValueAt(baris, 2).toString());
-                    stok.setText(model.getValueAt(baris, 3).toString());
-
-                }
+        tbl_buku.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            baris = tbl_buku.getSelectedRow();
+            if (baris >= 0) {
+                judul.setText(model.getValueAt(baris, 0).toString());
+                penerbit.setText(model.getValueAt(baris, 1).toString());
+                kategori.setText(model.getValueAt(baris, 2).toString());
+                stok.setText(model.getValueAt(baris, 3).toString());
+                
             }
         });
 
@@ -349,7 +346,7 @@ public class view_buku extends javax.swing.JFrame {
         enable_text(true);
         clear_text();
         action = "INSERT";
-        
+
         judul.setEnabled(true);
         judul.setEditable(true);
         judul.requestFocus();
