@@ -377,21 +377,27 @@ public class view_buku extends javax.swing.JFrame {
         b.setJudul(judul.getText());
         b.setKategori(kategori.getText());
         b.setPenerbit(penerbit.getText());
+
         try {
             b.setStok(Integer.parseInt(stok.getText()));
-            
-            if (action.equalsIgnoreCase("INSERT")) {
-                status = bukuDAO.insert(b);
+
+            if (b.getJudul().equals("") || b.getPenerbit().equals("") || b.getKategori().equals("")) {
+                JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
             } else {
-                status = bukuDAO.update(b);
+                if (action.equalsIgnoreCase("INSERT")) {
+                    status = bukuDAO.insert(b);
+                } else {
+                    status = bukuDAO.update(b);
+                }
+                if (status == false) {
+                    JOptionPane.showMessageDialog(null, "Data gagal disimpan",
+                            "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                }
+                refresh_table();
+                enable_text(false);
+                button_default(true);
             }
-            if (status == false) {
-                JOptionPane.showMessageDialog(null, "Data gagal disimpan",
-                        "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            }
-            refresh_table();
-            enable_text(false);
-            button_default(true);
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "isi STOK dengan ANGKA");
         }
