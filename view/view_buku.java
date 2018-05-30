@@ -263,7 +263,7 @@ public class view_buku extends javax.swing.JFrame {
 
         judul.setBackground(new Color(0,0,0,0));
         judul.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        judul.setForeground(new java.awt.Color(128, 128, 128));
+        judul.setForeground(new java.awt.Color(0, 0, 0));
         judul.setBorder(null);
         judul.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         judul.setSelectionColor(new java.awt.Color(0, 122, 255));
