@@ -12,7 +12,6 @@ import interfaces.int_buku;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -101,7 +100,6 @@ public class view_buku extends javax.swing.JFrame {
                 penerbit.setText(model.getValueAt(baris, 1).toString());
                 kategori.setText(model.getValueAt(baris, 2).toString());
                 stok.setText(model.getValueAt(baris, 3).toString());
-                
             }
         });
 
