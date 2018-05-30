@@ -74,7 +74,6 @@ public class view_buku extends javax.swing.JFrame {
         if (tbl_buku.getRowCount() > 0) {
             baris = tbl_buku.getRowCount() - 1;
             tbl_buku.setRowSelectionInterval(baris, baris);
-
             action = "";
         }
 
@@ -360,7 +359,6 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
         button_default(true);
         enable_text(false);
-
         refresh_table();
     }//GEN-LAST:event_btn_cancelMouseClicked
 
@@ -377,7 +375,7 @@ public class view_buku extends javax.swing.JFrame {
 
         if (action.equalsIgnoreCase("INSERT")) {
             status = bukuDAO.insertBuku(b);
-        }else {
+        } else {
             status = bukuDAO.updateBuku(b);
         }
         if (status == false) {
@@ -394,17 +392,13 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
-        if (JOptionPane.showConfirmDialog(null,
-		"Yakin ingin menghapus?",
-		"Konfirmasi",
-		JOptionPane. YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-	   status = bukuDAO.deleteBuku(judul.getText());
+        if (JOptionPane.showConfirmDialog(null,"Yakin ingin menghapus?","Konfirmasi",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            status = bukuDAO.deleteBuku(judul.getText());
 
-	   if (status == false) {
-	       JOptionPane.showMessageDialog(null,"Gagal menghapus data!",
-                "Informasi", JOptionPane.INFORMATION_MESSAGE);
-	   }
-	}
+            if (status == false){
+                JOptionPane.showMessageDialog(null, "Gagal menghapus data!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
 
         refresh_table();
     }//GEN-LAST:event_btn_hapusMouseClicked
