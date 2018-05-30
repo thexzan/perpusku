@@ -14,6 +14,6 @@ import java.util.List;
 public interface int_buku {
     boolean insertBuku (ent_buku b);
     boolean updateBuku (ent_buku b);
-//    boolean deleteBuku (int id);
+    boolean deleteBuku (String judul);
     List getBuku(String cari);
 }

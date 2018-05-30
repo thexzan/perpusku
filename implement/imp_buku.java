@@ -43,10 +43,14 @@ public class imp_buku implements int_buku {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    @Override
-//    public boolean deleteBuku(int id) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    @Override
+    public boolean deleteBuku(String judul) {
+        status = false;
+        query = "DELETE FROM buku WHERE judul ='"+judul+"'";
+        status = db.exe(query, false);
+        return status;
+    }
+    
     @Override
     public List getBuku(String cari) {
         query = "SELECT * FROM buku WHERE judul like '%" + cari + "%' or kategori like '%" + cari + "%' or penerbit like '%" + cari + "%' order by id";

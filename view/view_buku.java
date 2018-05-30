@@ -225,6 +225,9 @@ public class view_buku extends javax.swing.JFrame {
 
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_hapusMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_hapusMouseExited(evt);
             }
@@ -389,6 +392,22 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
         refresh_table();
     }//GEN-LAST:event_btn_refreshMouseClicked
+
+    private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
+        if (JOptionPane.showConfirmDialog(null,
+		"Yakin ingin menghapus?",
+		"Konfirmasi",
+		JOptionPane. YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+	   status = bukuDAO.deleteBuku(judul.getText());
+
+	   if (status == false) {
+	       JOptionPane.showMessageDialog(null,"Gagal menghapus data!",
+                "Informasi", JOptionPane.INFORMATION_MESSAGE);
+	   }
+	}
+
+        refresh_table();
+    }//GEN-LAST:event_btn_hapusMouseClicked
 
     /**
      * @param args the command line arguments
