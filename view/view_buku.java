@@ -26,8 +26,8 @@ public class view_buku extends javax.swing.JFrame {
     private String action;
     private boolean status;
     private DefaultTableModel model;
-    private String[] tabelHeader;
-    private int_buku bukuDAO;
+    private final String[] tabelHeader;
+    private final int_buku bukuDAO;
     private List<ent_buku> listBuku;
     private ent_buku b;
 
@@ -39,6 +39,8 @@ public class view_buku extends javax.swing.JFrame {
         stok.setEditable(status);
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
+        judul.setEnabled(false);
+        judul.setEditable(false);
     }
 
     private void button_default(boolean status) {
@@ -60,7 +62,7 @@ public class view_buku extends javax.swing.JFrame {
     }
 
     private void refresh_table() {
-        listBuku = bukuDAO.getBuku(cari.getText());
+        listBuku = bukuDAO.get(cari.getText());
         model = (DefaultTableModel) tbl_buku.getModel();
         model.setRowCount(0);
 
@@ -347,7 +349,10 @@ public class view_buku extends javax.swing.JFrame {
         enable_text(true);
         clear_text();
         action = "INSERT";
-        kategori.requestFocus();
+        
+        judul.setEnabled(true);
+        judul.setEditable(true);
+        judul.requestFocus();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
@@ -375,9 +380,9 @@ public class view_buku extends javax.swing.JFrame {
         b.setStok(Integer.parseInt(stok.getText()));
 
         if (action.equalsIgnoreCase("INSERT")) {
-            status = bukuDAO.insertBuku(b);
+            status = bukuDAO.insert(b);
         } else {
-            status = bukuDAO.updateBuku(b);
+            status = bukuDAO.update(b);
         }
         if (status == false) {
             JOptionPane.showMessageDialog(null, "Data gagal disimpan",
@@ -394,7 +399,7 @@ public class view_buku extends javax.swing.JFrame {
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
         if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            status = bukuDAO.deleteBuku(judul.getText());
+            status = bukuDAO.delete(judul.getText());
 
             if (status == false) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
