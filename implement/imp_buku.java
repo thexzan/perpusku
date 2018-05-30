@@ -41,7 +41,7 @@ public class imp_buku implements int_buku {
     @Override
     public boolean updateBuku(ent_buku b) {
         status = false;
-        query = "UPDATE buku SET judul='"+b.getJudul()+"','"+b.getKategori()+"','"+b.getPenerbit()+"','"+b.getStok()+"' WHERE judul='"+b.getJudul()+"'  ";
+        query = "UPDATE buku SET judul='"+b.getJudul()+"',kategori='"+b.getKategori()+"',penerbit='"+b.getPenerbit()+"',stok='"+b.getStok()+"' WHERE judul='"+b.getJudul()+"'";
         status = db.exe(query, false);
         return status;
     }

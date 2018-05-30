@@ -32,9 +32,11 @@ public class view_buku extends javax.swing.JFrame {
     private ent_buku b;
 
     private void enable_text(boolean status) {
-        judul.setEditable(status);
         kategori.setEditable(status);
+        kategori.setEnabled(status);
+        penerbit.setEditable(status);
         penerbit.setEnabled(status);
+        stok.setEditable(status);
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
     }
@@ -82,8 +84,7 @@ public class view_buku extends javax.swing.JFrame {
     public view_buku() {
         initComponents();
         enable_text(false);
-//        btn_edit.setVisible(false);
-//        btn_tambah.setVisible(false);
+        judul.setEnabled(false);
         btn_cancel.setVisible(false);
         btn_save.setVisible(false);
 
@@ -138,7 +139,7 @@ public class view_buku extends javax.swing.JFrame {
 
         kategori.setBackground(new Color(0,0,0,0));
         kategori.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        kategori.setForeground(new java.awt.Color(128, 128, 128));
+        kategori.setForeground(new java.awt.Color(0, 0, 0));
         kategori.setBorder(null);
         kategori.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         kategori.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -146,7 +147,7 @@ public class view_buku extends javax.swing.JFrame {
 
         stok.setBackground(new Color(0,0,0,0));
         stok.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        stok.setForeground(new java.awt.Color(128, 128, 128));
+        stok.setForeground(new java.awt.Color(0, 0, 0));
         stok.setBorder(null);
         stok.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         stok.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -268,7 +269,7 @@ public class view_buku extends javax.swing.JFrame {
 
         penerbit.setBackground(new Color(0,0,0,0));
         penerbit.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        penerbit.setForeground(new java.awt.Color(128, 128, 128));
+        penerbit.setForeground(new java.awt.Color(0, 0, 0));
         penerbit.setBorder(null);
         penerbit.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         penerbit.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -346,14 +347,14 @@ public class view_buku extends javax.swing.JFrame {
         enable_text(true);
         clear_text();
         action = "INSERT";
-        judul.requestFocus();
+        kategori.requestFocus();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
         button_default(false);
         enable_text(true);
         action = "UPDATE";
-        judul.requestFocus();
+        kategori.requestFocus();
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
