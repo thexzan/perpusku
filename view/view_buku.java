@@ -31,18 +31,14 @@ public class view_buku extends javax.swing.JFrame {
     private ent_buku b;
 
     private void enable_text(boolean status) {
-        kategori.setEditable(status);
-        kategori.setEnabled(status);
-        penerbit.setEditable(status);
-        penerbit.setEnabled(status);
-        stok.setEditable(status);
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
+        penerbit.setEnabled(status);
+        kategori.setEnabled(status);
         
         cari.setEnabled(!status);
         cari.setEditable(!status);
         judul.setEnabled(false);
-        judul.setEditable(false);
     }
 
     private void default_button(boolean status) {
@@ -100,8 +96,8 @@ public class view_buku extends javax.swing.JFrame {
             baris = tbl_buku.getSelectedRow();
             if (baris >= 0) {
                 judul.setText(model.getValueAt(baris, 0).toString());
-                penerbit.setText(model.getValueAt(baris, 1).toString());
-                kategori.setText(model.getValueAt(baris, 2).toString());
+                kategori.setText(model.getValueAt(baris, 1).toString());
+                penerbit.setText(model.getValueAt(baris, 2).toString());
                 stok.setText(model.getValueAt(baris, 3).toString());
             }
         });
