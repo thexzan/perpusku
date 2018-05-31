@@ -161,7 +161,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_saveMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +175,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_tambahMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
         btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,7 +189,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_cancelMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_edit.png"))); // NOI18N
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,7 +203,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_editMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
         btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,7 +223,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_refreshMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 426, 60, -1));
+        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 426, 60, -1));
 
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,7 +237,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_hapusMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 346, 60, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
 
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
