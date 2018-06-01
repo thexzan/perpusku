@@ -35,7 +35,7 @@ public class view_anggota extends javax.swing.JFrame {
         nama.setEnabled(status);
         tabel.setEnabled(!status);
         telpon.setEnabled(status);
-        alamat.setEnabled(status);
+        alamat.setEditable(status);
         
         cari.setEnabled(!status);
         cari.setEditable(!status);
@@ -273,11 +273,22 @@ public class view_anggota extends javax.swing.JFrame {
         });
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 80, 165, 30));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        alamat.setBackground(new java.awt.Color(255, 255, 255));
         alamat.setColumns(20);
+        alamat.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        alamat.setForeground(new java.awt.Color(0, 0, 0));
         alamat.setRows(5);
+        alamat.setBorder(null);
+        alamat.setSelectionColor(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(alamat);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 240, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 230, 100));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_anggota.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
