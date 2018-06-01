@@ -36,16 +36,18 @@ public class db {
         return rs;
     }
 
-    public boolean exe(String query, boolean kategori) {
+    public boolean exe(String query, boolean status) {
         try {
             ps = conn.prepareStatement(query);
-            if (kategori) {
+            if (status) {
                 rs = ps.executeQuery(); //select
             } else {
                 ps.executeUpdate(); //insert, update, delete
             }
             return true;
-        } catch (Exception e) {
+        }catch(SQLException e) {
+            System.out.println("QUERY ERROR == " + e);
+            System.exit(0);
             return false;
         }
     }

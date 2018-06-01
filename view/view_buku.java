@@ -12,7 +12,6 @@ import interfaces.int_buku;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,18 +31,17 @@ public class view_buku extends javax.swing.JFrame {
     private ent_buku b;
 
     private void enable_text(boolean status) {
-        kategori.setEditable(status);
-        kategori.setEnabled(status);
-        penerbit.setEditable(status);
-        penerbit.setEnabled(status);
-        stok.setEditable(status);
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
+        penerbit.setEnabled(status);
+        kategori.setEnabled(status);
+        
+        cari.setEnabled(!status);
+        cari.setEditable(!status);
         judul.setEnabled(false);
-        judul.setEditable(false);
     }
 
-    private void button_default(boolean status) {
+    private void default_button(boolean status) {
         btn_tambah.setVisible(status);
         btn_edit.setVisible(status);
         btn_hapus.setVisible(status);
@@ -94,17 +92,13 @@ public class view_buku extends javax.swing.JFrame {
         tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
         model = new DefaultTableModel(null, tabelHeader);
         tbl_buku.setModel(model);
-        tbl_buku.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-            public void valueChanged(ListSelectionEvent e) {
-                baris = tbl_buku.getSelectedRow();
-                if (baris >= 0) {
-                    judul.setText(model.getValueAt(baris, 0).toString());
-                    penerbit.setText(model.getValueAt(baris, 1).toString());
-                    kategori.setText(model.getValueAt(baris, 2).toString());
-                    stok.setText(model.getValueAt(baris, 3).toString());
-
-                }
+        tbl_buku.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            baris = tbl_buku.getSelectedRow();
+            if (baris >= 0) {
+                judul.setText(model.getValueAt(baris, 0).toString());
+                kategori.setText(model.getValueAt(baris, 1).toString());
+                penerbit.setText(model.getValueAt(baris, 2).toString());
+                stok.setText(model.getValueAt(baris, 3).toString());
             }
         });
 
@@ -167,7 +161,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_saveMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -181,7 +175,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_tambahMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
         btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -195,7 +189,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_cancelMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_edit.png"))); // NOI18N
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,10 +203,16 @@ public class view_buku extends javax.swing.JFrame {
                 btn_editMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
         btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_refreshMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_refreshMouseClicked(evt);
             }
@@ -223,7 +223,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_refreshMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 426, 60, -1));
+        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 426, 60, -1));
 
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,7 +237,7 @@ public class view_buku extends javax.swing.JFrame {
                 btn_hapusMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 346, 60, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
 
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
@@ -263,7 +263,7 @@ public class view_buku extends javax.swing.JFrame {
 
         judul.setBackground(new Color(0,0,0,0));
         judul.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        judul.setForeground(new java.awt.Color(128, 128, 128));
+        judul.setForeground(new java.awt.Color(0, 0, 0));
         judul.setBorder(null);
         judul.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         judul.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -345,27 +345,29 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        button_default(false);
+        default_button(false);
         enable_text(true);
         clear_text();
         action = "INSERT";
-        
+
         judul.setEnabled(true);
         judul.setEditable(true);
         judul.requestFocus();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
-        button_default(false);
+        default_button(false);
         enable_text(true);
         action = "UPDATE";
         kategori.requestFocus();
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
-        button_default(true);
-        enable_text(false);
-        refresh_table();
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin Cancel?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            default_button(true);
+            enable_text(false);
+            refresh_table();
+        }
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
@@ -377,24 +379,35 @@ public class view_buku extends javax.swing.JFrame {
         b.setJudul(judul.getText());
         b.setKategori(kategori.getText());
         b.setPenerbit(penerbit.getText());
-        b.setStok(Integer.parseInt(stok.getText()));
 
-        if (action.equalsIgnoreCase("INSERT")) {
-            status = bukuDAO.insert(b);
-        } else {
-            status = bukuDAO.update(b);
+        try {
+            b.setStok(Integer.parseInt(stok.getText()));
+
+            if (b.getJudul().equals("") || b.getPenerbit().equals("") || b.getKategori().equals("")) {
+                JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
+            } else {
+                if (action.equalsIgnoreCase("INSERT")) {
+                    status = bukuDAO.insert(b);
+                } else {
+                    status = bukuDAO.update(b);
+                }
+                if (status == false) {
+                    JOptionPane.showMessageDialog(null, "Data gagal disimpan","Informasi", JOptionPane.INFORMATION_MESSAGE);
+                }
+                refresh_table();
+                enable_text(false);
+                default_button(true);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "isi STOK dengan ANGKA");
         }
-        if (status == false) {
-            JOptionPane.showMessageDialog(null, "Data gagal disimpan",
-                    "Informasi", JOptionPane.INFORMATION_MESSAGE);
-        }
-        refresh_table();
-        enable_text(false);
-        button_default(true);
     }//GEN-LAST:event_btn_saveMouseClicked
 
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
+        cari.setText("");
         refresh_table();
+       
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
@@ -408,6 +421,14 @@ public class view_buku extends javax.swing.JFrame {
 
         refresh_table();
     }//GEN-LAST:event_btn_hapusMouseClicked
+
+    private void btn_refreshMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMousePressed
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_pressed.png")));
+    }//GEN-LAST:event_btn_refreshMousePressed
+
+    private void btn_refreshMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseReleased
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
+    }//GEN-LAST:event_btn_refreshMouseReleased
 
     /**
      * @param args the command line arguments
