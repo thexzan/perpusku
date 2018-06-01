@@ -16,6 +16,6 @@ public interface int_anggota {
 
     boolean insert(ent_anggota a);
     boolean update(ent_anggota a);
-    boolean delete(String telpon);
+    boolean delete(int id);
     List get(String cari);
 }

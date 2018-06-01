@@ -40,13 +40,16 @@ public class imp_anggota implements int_anggota{
 
     @Override
     public boolean update(ent_anggota a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        status = false;
+        query = "UPDATE anggota SET nama='"+a.getNama()+"',telpon='"+a.getTelpon()+"',alamat='"+a.getAlamat()+"' WHERE id='"+a.getId()+"'";
+        status = db.exe(query, false);
+        return status;
     }
 
     @Override
-    public boolean delete(String telpon) {
+    public boolean delete(int id) {
         status = false;
-        query = "DELETE FROM buku WHERE telpon ='"+telpon+"'";
+        query = "DELETE FROM anggota WHERE id ='"+id+"'";
         status = db.exe(query, false);
         return status;
     }
