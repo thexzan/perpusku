@@ -36,9 +36,8 @@ public class db {
         return rs;
     }
 
-    public boolean exe(String query, boolean status) {
+    public boolean exe(PreparedStatement ps, boolean status) {
         try {
-            ps = conn.prepareStatement(query);
             if (status) {
                 rs = ps.executeQuery(); //select
             } else {
