@@ -36,13 +36,13 @@ public class imp_buku implements int_buku {
     public boolean insert(ent_buku b) {
         status = false;
         try {
-            ps = db.connect().prepareStatement("INSERT INTO buku VALUES (NULL,?,?,?)");
+            ps = db.connect().prepareStatement("INSERT INTO buku VALUES (NULL,?,?,?,?)");
             ps.setString(1, b.getJudul());
             ps.setString(2, b.getKategori());
             ps.setString(3, b.getPenerbit());
             ps.setInt(4, b.getStok());
         } catch (SQLException e) {
-            System.out.println("QUERY SALAH = " + e.getMessage());
+            System.out.println("QUERY INSERT SALAH = " + e.getMessage());
             System.exit(0);
         }
         status = db.exe(ps, false);
@@ -60,7 +60,7 @@ public class imp_buku implements int_buku {
             ps.setInt(4, b.getStok());
             ps.setString(5, b.getJudul());
         } catch (SQLException e) {
-            System.out.println("QUERY SALAH = " + e.getMessage());
+            System.out.println("QUERY UPDATE SALAH = " + e.getMessage());
             System.exit(0);
         }
         status = db.exe(ps, false);
@@ -74,7 +74,7 @@ public class imp_buku implements int_buku {
             ps = db.connect().prepareStatement("DELETE FROM buku WHERE judul = ?");
             ps.setString(1, judul);
         } catch (SQLException e) {
-            System.out.println("QUERY SALAH = " + e.getMessage());
+            System.out.println("QUERY DELETE SALAH = " + e.getMessage());
             System.exit(0);
         }
         status = db.exe(ps, false);
@@ -89,7 +89,7 @@ public class imp_buku implements int_buku {
             ps.setString(2, "%" + cari + "%");
             ps.setString(3, "%" + cari + "%");
         } catch (SQLException e) {
-            System.out.println("QUERY SALAH = " + e.getMessage());
+            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
             System.exit(0);
         }
         status = db.exe(ps, true);
