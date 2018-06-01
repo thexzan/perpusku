@@ -6,6 +6,13 @@
 package view;
 
 import java.awt.Color;
+import entity.ent_anggota;
+import factory.factory;
+import interfaces.int_anggota;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,16 +21,89 @@ import java.awt.Color;
  */
 public class view_anggota extends javax.swing.JFrame {
 
-    /**
-     * Creates new form view_anggota
-     */
+    private int baris;
+    private int id_anggota;
+    private String action;
+    private boolean status;
+    private DefaultTableModel model;
+    private final String[] tabelHeader;
+    private final int_anggota anggotaDAO;
+    private List<ent_anggota> listBuku;
+    private ent_anggota a;
+
+    private void enable_text(boolean status) {
+        stok.setEnabled(status);
+        tbl_buku.setEnabled(!status);
+        penerbit.setEnabled(status);
+        kategori.setEnabled(status);
+        
+        cari.setEnabled(!status);
+        cari.setEditable(!status);
+        judul.setEnabled(false);
+    }
+
+    private void default_button(boolean status) {
+        btn_tambah.setVisible(status);
+        btn_edit.setVisible(status);
+        btn_hapus.setVisible(status);
+        btn_refresh.setVisible(status);
+
+        btn_save.setVisible(!status);
+        btn_cancel.setVisible(!status);
+    }
+
+    private void clear_text() {
+        judul.setText("");
+        kategori.setText("");
+        penerbit.setText("");
+        stok.setText("");
+        cari.setText("");
+    }
+
+    private void refresh_table() {
+        listBuku = bukuDAO.get(cari.getText());
+        model = (DefaultTableModel) tbl_buku.getModel();
+        model.setRowCount(0);
+
+        for (ent_buku data : listBuku) {
+            model.addRow(new Object[]{
+                data.getJudul(),
+                data.getKategori(),
+                data.getPenerbit(),
+                data.getStok()
+            });
+        }
+
+        if (tbl_buku.getRowCount() > 0) {
+            baris = tbl_buku.getRowCount() - 1;
+            tbl_buku.setRowSelectionInterval(baris, baris);
+            action = "";
+        }
+
+    }
+
     public view_anggota() {
         initComponents();
-//        btn_edit.setVisible(false);
-//        btn_tambah.setVisible(false);
+        enable_text(false);
+        judul.setEnabled(false);
         btn_cancel.setVisible(false);
         btn_save.setVisible(false);
 
+        bukuDAO = factory.getBukuDA0();
+        tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
+        model = new DefaultTableModel(null, tabelHeader);
+        tbl_buku.setModel(model);
+        tbl_buku.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            baris = tbl_buku.getSelectedRow();
+            if (baris >= 0) {
+                judul.setText(model.getValueAt(baris, 0).toString());
+                kategori.setText(model.getValueAt(baris, 1).toString());
+                penerbit.setText(model.getValueAt(baris, 2).toString());
+                stok.setText(model.getValueAt(baris, 3).toString());
+            }
+        });
+
+        refresh_table();
     }
 
     /**
@@ -35,29 +115,46 @@ public class view_anggota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        kategori = new javax.swing.JTextField();
+        stok = new javax.swing.JTextField();
         btn_save = new javax.swing.JLabel();
         btn_tambah = new javax.swing.JLabel();
         btn_cancel = new javax.swing.JLabel();
         btn_edit = new javax.swing.JLabel();
         btn_refresh = new javax.swing.JLabel();
         btn_hapus = new javax.swing.JLabel();
-        scrol = new javax.swing.JScrollPane();
-        tbl_anggota = new javax.swing.JTable();
-        nama = new javax.swing.JTextField();
-        telpon = new javax.swing.JTextField();
-        alamat = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        tbl_anggota = new javax.swing.JScrollPane();
+        tbl_buku = new javax.swing.JTable();
+        judul = new javax.swing.JTextField();
+        penerbit = new javax.swing.JTextField();
         cari = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(640, 620));
         setMinimumSize(new java.awt.Dimension(640, 620));
-        setPreferredSize(new java.awt.Dimension(640, 620));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        kategori.setBackground(new Color(0,0,0,0));
+        kategori.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        kategori.setForeground(new java.awt.Color(0, 0, 0));
+        kategori.setBorder(null);
+        kategori.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        kategori.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 450, 220, 30));
+
+        stok.setBackground(new Color(0,0,0,0));
+        stok.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        stok.setForeground(new java.awt.Color(0, 0, 0));
+        stok.setBorder(null);
+        stok.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        stok.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 518, 220, 30));
 
         btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_saveMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_saveMouseExited(evt);
             }
@@ -65,7 +162,7 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_saveMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_tambah.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +176,7 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_tambahMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 186, 60, -1));
+        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         btn_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
         btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,7 +190,7 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_cancelMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_edit.png"))); // NOI18N
         btn_edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,10 +204,16 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_editMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 266, 60, -1));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh.png"))); // NOI18N
         btn_refresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_refreshMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_refreshMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_refreshMouseClicked(evt);
             }
@@ -121,10 +224,13 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_refreshMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 426, 60, -1));
+        getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 426, 60, -1));
 
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_hapusMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_hapusMouseExited(evt);
             }
@@ -132,14 +238,14 @@ public class view_anggota extends javax.swing.JFrame {
                 btn_hapusMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 346, 60, -1));
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
 
-        scrol.setBackground(new java.awt.Color(102, 255, 102));
-        scrol.setBorder(null);
-        scrol.setForeground(new java.awt.Color(204, 51, 255));
+        tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
+        tbl_anggota.setBorder(null);
+        tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
 
-        tbl_anggota.setForeground(new java.awt.Color(51, 51, 51));
-        tbl_anggota.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_buku.setForeground(new java.awt.Color(51, 51, 51));
+        tbl_buku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"TEST", "TEST", null, null},
                 {"TEST", "TEST", null, null},
@@ -150,46 +256,27 @@ public class view_anggota extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_anggota.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        tbl_anggota.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        scrol.setViewportView(tbl_anggota);
+        tbl_buku.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tbl_buku.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tbl_anggota.setViewportView(tbl_buku);
 
-        getContentPane().add(scrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 205));
+        getContentPane().add(tbl_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 205));
 
-        nama.setBackground(new Color(0,0,0,0));
-        nama.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        nama.setForeground(new java.awt.Color(128, 128, 128));
-        nama.setBorder(null);
-        nama.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        nama.setSelectionColor(new java.awt.Color(0, 122, 255));
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 450, 220, 30));
+        judul.setBackground(new Color(0,0,0,0));
+        judul.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        judul.setForeground(new java.awt.Color(0, 0, 0));
+        judul.setBorder(null);
+        judul.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        judul.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(judul, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 450, 220, 30));
 
-        telpon.setBackground(new Color(0,0,0,0));
-        telpon.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        telpon.setForeground(new java.awt.Color(128, 128, 128));
-        telpon.setBorder(null);
-        telpon.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        telpon.setSelectionColor(new java.awt.Color(0, 122, 255));
-        getContentPane().add(telpon, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 518, 220, 30));
-
-        alamat.setBackground(new java.awt.Color(255, 51, 51));
-        alamat.setBorder(null);
-        alamat.setForeground(new java.awt.Color(102, 204, 0));
-        alamat.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        alamat.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(128, 128, 128));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
-        jTextArea1.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        jTextArea1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        alamat.setViewportView(jTextArea1);
-
-        getContentPane().add(alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 450, 230, 100));
+        penerbit.setBackground(new Color(0,0,0,0));
+        penerbit.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        penerbit.setForeground(new java.awt.Color(0, 0, 0));
+        penerbit.setBorder(null);
+        penerbit.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        penerbit.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(penerbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 518, 220, 30));
 
         cari.setBackground(new Color(0,0,0,0));
         cari.setFont(new java.awt.Font("Osaka", 0, 18)); // NOI18N
@@ -197,6 +284,11 @@ public class view_anggota extends javax.swing.JFrame {
         cari.setBorder(null);
         cari.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         cari.setSelectionColor(new java.awt.Color(0, 84, 129));
+        cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cariKeyReleased(evt);
+            }
+        });
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 80, 165, 30));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_anggota.png"))); // NOI18N
@@ -254,39 +346,90 @@ public class view_anggota extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        btn_tambah.setVisible(false);
-        btn_edit.setVisible(false);
-        btn_hapus.setVisible(false);
-        btn_refresh.setVisible(false);
+        default_button(false);
+        enable_text(true);
+        clear_text();
+        action = "INSERT";
 
-        btn_save.setVisible(true);
-        btn_cancel.setVisible(true);
-
+        judul.setEnabled(true);
+        judul.setEditable(true);
+        judul.requestFocus();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
-    private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
-
-    }//GEN-LAST:event_btn_refreshMouseClicked
+    private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
+        default_button(false);
+        enable_text(true);
+        action = "UPDATE";
+        kategori.requestFocus();
+    }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
-        btn_tambah.setVisible(true);
-        btn_edit.setVisible(true);
-        btn_hapus.setVisible(true);
-        btn_refresh.setVisible(true);
-
-        btn_save.setVisible(false);
-        btn_cancel.setVisible(false);
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin Cancel?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            default_button(true);
+            enable_text(false);
+            refresh_table();
+        }
     }//GEN-LAST:event_btn_cancelMouseClicked
 
-    private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
-        btn_tambah.setVisible(false);
-        btn_edit.setVisible(false);
-        btn_hapus.setVisible(false);
-        btn_refresh.setVisible(false);
+    private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        refresh_table();
+    }//GEN-LAST:event_cariKeyReleased
 
-        btn_save.setVisible(true);
-        btn_cancel.setVisible(true);
-    }//GEN-LAST:event_btn_editMouseClicked
+    private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+        a = new ent_buku();
+        a.setJudul(judul.getText());
+        a.setKategori(kategori.getText());
+        a.setPenerbit(penerbit.getText());
+
+        try {
+            a.setStok(Integer.parseInt(stok.getText()));
+
+            if (a.getJudul().equals("") || a.getPenerbit().equals("") || a.getKategori().equals("")) {
+                JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
+            } else {
+                if (action.equalsIgnoreCase("INSERT")) {
+                    status = bukuDAO.insert(a);
+                } else {
+                    status = bukuDAO.update(a);
+                }
+                if (status == false) {
+                    JOptionPane.showMessageDialog(null, "Data gagal disimpan","Informasi", JOptionPane.INFORMATION_MESSAGE);
+                }
+                refresh_table();
+                enable_text(false);
+                default_button(true);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "isi STOK dengan ANGKA");
+        }
+    }//GEN-LAST:event_btn_saveMouseClicked
+
+    private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
+        cari.setText("");
+        refresh_table();
+       
+    }//GEN-LAST:event_btn_refreshMouseClicked
+
+    private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            status = bukuDAO.delete(judul.getText());
+
+            if (status == false) {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+        refresh_table();
+    }//GEN-LAST:event_btn_hapusMouseClicked
+
+    private void btn_refreshMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMousePressed
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_pressed.png")));
+    }//GEN-LAST:event_btn_refreshMousePressed
+
+    private void btn_refreshMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseReleased
+       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
+    }//GEN-LAST:event_btn_refreshMouseReleased
 
     /**
      * @param args the command line arguments
@@ -314,6 +457,9 @@ public class view_anggota extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(view_anggota.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -324,7 +470,6 @@ public class view_anggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane alamat;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel btn_cancel;
     private javax.swing.JLabel btn_edit;
@@ -333,10 +478,11 @@ public class view_anggota extends javax.swing.JFrame {
     private javax.swing.JLabel btn_save;
     private javax.swing.JLabel btn_tambah;
     private javax.swing.JTextField cari;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField nama;
-    private javax.swing.JScrollPane scrol;
-    private javax.swing.JTable tbl_anggota;
-    private javax.swing.JTextField telpon;
+    private javax.swing.JTextField judul;
+    private javax.swing.JTextField kategori;
+    private javax.swing.JTextField penerbit;
+    private javax.swing.JTextField stok;
+    private javax.swing.JScrollPane tbl_anggota;
+    private javax.swing.JTable tbl_buku;
     // End of variables declaration//GEN-END:variables
 }
