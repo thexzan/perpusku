@@ -35,19 +35,13 @@ public class db {
         return rs;
     }
 
-    public boolean exe(PreparedStatement ps, boolean status) {
-        try {
-            if (status) {
-                rs = ps.executeQuery(); //select
-            } else {
-                ps.executeUpdate(); //insert, update, delete
-            }
-            return true;
-        }catch(SQLException e) {
-            System.out.println("QUERY SALAH = " + e.getMessage());
-            System.exit(0);
-            return false;
+    public boolean execute(PreparedStatement ps, boolean status) throws SQLException {
+        if (status) {
+            rs = ps.executeQuery(); //select
+        } else {
+            ps.executeUpdate(); //insert, update, delete
         }
+        return true;
     }
 
     public static void main(String[] args) {
