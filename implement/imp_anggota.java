@@ -40,11 +40,12 @@ public class imp_anggota implements int_anggota {
             ps.setString(1, a.getNama());
             ps.setString(2, a.getTelpon());
             ps.setString(3, a.getAlamat());
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY INSERT SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -57,11 +58,12 @@ public class imp_anggota implements int_anggota {
             ps.setString(2, a.getTelpon());
             ps.setString(3, a.getAlamat());
             ps.setInt(4, a.getId());
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY UPDATE SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -71,11 +73,12 @@ public class imp_anggota implements int_anggota {
         try {
             ps = db.connect().prepareStatement("DELETE FROM anggota WHERE id = ?");
             ps.setInt(1, id);
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY DELETE SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -86,15 +89,12 @@ public class imp_anggota implements int_anggota {
             ps.setString(1, "%" + cari + "%");
             ps.setString(2, "%" + cari + "%");
             ps.setString(3, "%" + cari + "%");
-        } catch (SQLException e) {
-            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
-            System.exit(0);
-        }
-        status = db.exe(ps, true);
-        if (status) {
-            data_anggota = db.get_hasil();
-            listAnggota = new ArrayList<>();
-            try {
+
+            status = db.execute(ps, true);
+            if (status) {
+                data_anggota = db.get_hasil();
+                listAnggota = new ArrayList<>();
+
                 while (data_anggota.next()) {
                     ent_anggota b = new ent_anggota();
                     b.setId(data_anggota.getInt(1));
@@ -105,9 +105,10 @@ public class imp_anggota implements int_anggota {
                 }
                 data_anggota.close();
                 return listAnggota;
-            } catch (SQLException e) {
-                return null;
             }
+        } catch (SQLException e) {
+            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
+            System.exit(0);
         }
         return null;
     }

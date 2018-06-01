@@ -41,11 +41,12 @@ public class imp_buku implements int_buku {
             ps.setString(2, b.getKategori());
             ps.setString(3, b.getPenerbit());
             ps.setInt(4, b.getStok());
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY INSERT SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -59,11 +60,12 @@ public class imp_buku implements int_buku {
             ps.setString(3, b.getPenerbit());
             ps.setInt(4, b.getStok());
             ps.setString(5, b.getJudul());
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY UPDATE SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -73,11 +75,12 @@ public class imp_buku implements int_buku {
         try {
             ps = db.connect().prepareStatement("DELETE FROM buku WHERE judul = ?");
             ps.setString(1, judul);
+
+            status = db.execute(ps, false);
         } catch (SQLException e) {
             System.out.println("QUERY DELETE SALAH = " + e.getMessage());
             System.exit(0);
         }
-        status = db.exe(ps, false);
         return status;
     }
 
@@ -88,15 +91,12 @@ public class imp_buku implements int_buku {
             ps.setString(1, "%" + cari + "%");
             ps.setString(2, "%" + cari + "%");
             ps.setString(3, "%" + cari + "%");
-        } catch (SQLException e) {
-            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
-            System.exit(0);
-        }
-        status = db.exe(ps, true);
-        if (status) {
-            data_buku = db.get_hasil();
-            listBuku = new ArrayList<>();
-            try {
+
+            status = db.execute(ps, true);
+            if (status) {
+                data_buku = db.get_hasil();
+                listBuku = new ArrayList<>();
+
                 while (data_buku.next()) {
                     ent_buku b = new ent_buku();
                     b.setId(data_buku.getInt(1));
@@ -108,9 +108,10 @@ public class imp_buku implements int_buku {
                 }
                 data_buku.close();
                 return listBuku;
-            } catch (SQLException e) {
-                return null;
             }
+        } catch (SQLException e) {
+            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
+            System.exit(0);
         }
         return null;
     }
