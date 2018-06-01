@@ -19,13 +19,13 @@ public class db {
                 try {
                     String url = "jdbc:mysql://localhost:3306/perpusku";
                     conn = DriverManager.getConnection(url, "root", "root");
-                    System.out.println("Koneksi Sukses");
+                    System.out.println("KONEKSI SUKSES");
                 } catch (SQLException se) {
-                    System.out.println("Koneksi gagal " + se);
+                    System.out.println("KONEKSI GAGAL = " + se.getMessage());
                     System.exit(0);
                 }
             } catch (ClassNotFoundException cnfe) {
-                System.out.println("Class tidak ditemukan " + cnfe);
+                System.out.println("CLASS TIDAK DITEMUKAN = " + cnfe.getMessage());
                 System.exit(0);
             }
         }
@@ -46,7 +46,7 @@ public class db {
             }
             return true;
         }catch(SQLException e) {
-            System.out.println("QUERY ERROR == " + e);
+            System.out.println("QUERY SALAH = " + e.getMessage());
             System.exit(0);
             return false;
         }
