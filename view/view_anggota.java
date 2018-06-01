@@ -31,12 +31,16 @@ public class view_anggota extends javax.swing.JFrame {
     private List<ent_anggota> listAnggota;
     private ent_anggota a;
 
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");
+    }
+
     private void enable_text(boolean status) {
         nama.setEnabled(status);
         tabel.setEnabled(!status);
         telpon.setEnabled(status);
         alamat.setEditable(status);
-        
+
         cari.setEnabled(!status);
         cari.setEditable(!status);
     }
@@ -89,7 +93,7 @@ public class view_anggota extends javax.swing.JFrame {
         btn_save.setVisible(false);
 
         anggotaDAO = factory.getAnggotaDA0();
-        tabelHeader = new String[]{"id","Nama", "Telpon", "Alamat"};
+        tabelHeader = new String[]{"id", "Nama", "Telpon", "Alamat"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
@@ -133,7 +137,7 @@ public class view_anggota extends javax.swing.JFrame {
         alamat = new javax.swing.JTextArea();
         bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 620));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -389,8 +393,13 @@ public class view_anggota extends javax.swing.JFrame {
         a.setNama(nama.getText());
         a.setTelpon(telpon.getText());
         a.setAlamat(alamat.getText());
+        
+        if (!isNumeric(a.getTelpon())) {
+            JOptionPane.showMessageDialog(null, "Silakan isi No Telpon dengan ANGKA");
+            telpon.setText("");
+        }
 
-        if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")) {
+        if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")){
             JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
         } else {
             if (action.equalsIgnoreCase("INSERT")) {
@@ -410,7 +419,7 @@ public class view_anggota extends javax.swing.JFrame {
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
         cari.setText("");
         refresh_table();
-       
+
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
@@ -426,11 +435,11 @@ public class view_anggota extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_hapusMouseClicked
 
     private void btn_refreshMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMousePressed
-       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_pressed.png")));
+        btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_pressed.png")));
     }//GEN-LAST:event_btn_refreshMousePressed
 
     private void btn_refreshMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseReleased
-       btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
+        btn_refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_refresh_hover.png")));
     }//GEN-LAST:event_btn_refreshMouseReleased
 
     /**
