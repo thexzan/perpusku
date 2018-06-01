@@ -102,6 +102,10 @@ public class view_buku extends javax.swing.JFrame {
                 stok.setText(model.getValueAt(baris, 3).toString());
             }
         });
+        tbl_buku.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tbl_buku.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbl_buku.getColumnModel().getColumn(2).setPreferredWidth(140);
+        tbl_buku.getColumnModel().getColumn(3).setPreferredWidth(40);
 
         refresh_table();
     }
@@ -243,6 +247,8 @@ public class view_buku extends javax.swing.JFrame {
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
         tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
+        tbl_anggota.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tbl_anggota.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         tbl_buku.setForeground(new java.awt.Color(51, 51, 51));
         tbl_buku.setModel(new javax.swing.table.DefaultTableModel(
@@ -256,6 +262,7 @@ public class view_buku extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_buku.setPreferredSize(new java.awt.Dimension(480, 190));
         tbl_buku.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tbl_buku.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setViewportView(tbl_buku);

@@ -101,6 +101,10 @@ public class view_anggota extends javax.swing.JFrame {
                 alamat.setText(model.getValueAt(baris, 3).toString());
             }
         });
+        tabel.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tabel.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tabel.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tabel.getColumnModel().getColumn(3).setPreferredWidth(150);
 
         refresh_table();
     }
@@ -226,6 +230,8 @@ public class view_anggota extends javax.swing.JFrame {
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
         tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
+        tbl_anggota.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tbl_anggota.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         tabel.setForeground(new java.awt.Color(51, 51, 51));
         tabel.setModel(new javax.swing.table.DefaultTableModel(
@@ -239,6 +245,7 @@ public class view_anggota extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabel.setPreferredSize(new java.awt.Dimension(480, 190));
         tabel.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tabel.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setViewportView(tabel);
