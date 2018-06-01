@@ -83,6 +83,7 @@ public class view_buku extends javax.swing.JFrame {
 
     public view_buku() {
         initComponents();
+        setLocationRelativeTo(null);
         enable_text(false);
         judul.setEnabled(false);
         btn_cancel.setVisible(false);

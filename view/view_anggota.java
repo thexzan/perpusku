@@ -82,6 +82,7 @@ public class view_anggota extends javax.swing.JFrame {
 
     public view_anggota() {
         initComponents();
+        setLocationRelativeTo(null);
         enable_text(false);
         nama.setEnabled(false);
         btn_cancel.setVisible(false);
