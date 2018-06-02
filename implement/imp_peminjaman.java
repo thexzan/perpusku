@@ -24,7 +24,7 @@ public class imp_peminjaman implements int_peminjaman {
     private final db db;
     private boolean status;
     private ResultSet data;
-    private List<ent_peminjaman> listPeminjaman;
+    private ArrayList<ArrayList<String>> listPeminjaman;
     private PreparedStatement ps;
 
     public imp_peminjaman() {
@@ -35,23 +35,22 @@ public class imp_peminjaman implements int_peminjaman {
     @Override
     public List get(String cari) {
         try {
-            ps = db.connect().prepareStatement("select id,id_anggota,tanggal,status from peminjaman where id like ?");
+            ps = db.connect().prepareStatement("call daftar_peminjaman3(?)");
             ps.setString(1, "%" + cari + "%");
 
             status = db.execute(ps, true);
             if (status) {
                 data = db.get_hasil();
-                listPeminjaman = new ArrayList<>();
+                listPeminjaman =new ArrayList<ArrayList<String>>();
 
                 while (data.next()) {
-                    ent_peminjaman x = new ent_peminjaman();
+                     ArrayList<String> x = new ArrayList<String>();
                     
-                    x.setId(data.getInt(1));
-                    x.setId_anggota(data.getInt(2));
-                    x.setTanggal(data.getString(3));
-                    x.setStatus(data.getString(4));
-//                    x.setTanggal_kembali(data.getString(5));
-//                    x.setDenda(data.getInt(6));
+                    x.add(String.valueOf(data.getInt("id_peminjaman")));
+                    x.add(data.getString("nama"));
+                    x.add(data.getString("telpon"));
+                    x.add(data.getString("tanggal"));
+                    x.add(data.getString("status"));
                     listPeminjaman.add(x);
                 }
                 data.close();

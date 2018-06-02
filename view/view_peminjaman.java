@@ -9,8 +9,7 @@ import java.awt.Color;
 import entity.ent_peminjaman;
 import factory.factory;
 import interfaces.int_peminjaman;
-import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,46 +27,27 @@ public class view_peminjaman extends javax.swing.JFrame {
     private DefaultTableModel model;
     private final String[] tabelHeader;
     private final int_peminjaman peminjamanDAO;
-    private List<ent_peminjaman> listData;
+    private ArrayList<ArrayList<String>> listData;
     private ent_peminjaman a;
-
-    private void enable_text(boolean status) {
-//        nama.setEnabled(status);
-//        tabel.setEnabled(!status);
-//        telpon.setEnabled(status);
-//        alamat.setEditable(status);
-//
-//        cari.setEnabled(!status);
-//        cari.setEditable(!status);
-    }
-
-    private void default_button(boolean status) {
-//        btn_tambah.setVisible(status);
-//        btn_edit.setVisible(status);
-//        btn_hapus.setVisible(status);
-//        btn_refresh.setVisible(status);
-//
-//        btn_save.setVisible(!status);
-//        btn_detail.setVisible(!status);
-    }
 
     private void clear_text() {
         cari.setText("");
     }
 
     private void refresh_table() {
-        listData = peminjamanDAO.get(cari.getText());
+        listData = (ArrayList<ArrayList<String>>) peminjamanDAO.get(cari.getText());
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
 
-        for (ent_peminjaman data : listData) {
+        listData.forEach((data) -> {
             model.addRow(new Object[]{
-                data.getId(),
-                data.getId_anggota(),
-                data.getTanggal(),
-                data.getStatus()
+                data.get(0),
+                data.get(1),
+                data.get(2),
+                data.get(3),
+                data.get(4)
             });
-        }
+        });
 
         if (tabel.getRowCount() > 0) {
             baris = tabel.getRowCount() - 1;
@@ -80,14 +60,9 @@ public class view_peminjaman extends javax.swing.JFrame {
     public view_peminjaman() {
         initComponents();
         setLocationRelativeTo(null);
-        enable_text(false);
-//        nama.setEnabled(false);
-        btn_detail.setVisible(false);
-//        btn_save.setVisible(false);
-
+      
         peminjamanDAO = factory.getPeminjamanDA0();
-        tabelHeader = new String[]{"id", "id_Peminjam", "Tanggal", "Status"};
-//        tabelHeader = new String[]{"id", "Nama", "Telpon", "Tanggal","# Buku","Status"};
+        tabelHeader = new String[]{"ID", "Nama", "Telpon", "Tanggal", "Status"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
@@ -96,10 +71,11 @@ public class view_peminjaman extends javax.swing.JFrame {
                 id_peminjaman = Integer.parseInt((model.getValueAt(baris, 0).toString()));;
             }
         });
-        tabel.getColumnModel().getColumn(0).setPreferredWidth(30);
-        tabel.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tabel.getColumnModel().getColumn(2).setPreferredWidth(150);
-        tabel.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tabel.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tabel.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabel.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tabel.getColumnModel().getColumn(3).setPreferredWidth(220);
+        tabel.getColumnModel().getColumn(3).setPreferredWidth(30);
 
         refresh_table();
     }
@@ -236,16 +212,14 @@ public class view_peminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_refreshMouseEntered
 
     private void btn_detailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseExited
-        btn_detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png")));
+        btn_detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_detail.png")));
     }//GEN-LAST:event_btn_detailMouseExited
 
     private void btn_detailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseEntered
-        btn_detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
+        btn_detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_detail_hover.png")));
     }//GEN-LAST:event_btn_detailMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        default_button(false);
-        enable_text(true);
         clear_text();
         action = "INSERT";
 
@@ -255,11 +229,9 @@ public class view_peminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseClicked
-        if (JOptionPane.showConfirmDialog(null, "Yakin ingin Cancel?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            default_button(true);
-            enable_text(false);
-            refresh_table();
-        }
+        view_peminjaman_detail a =  new view_peminjaman_detail(id_peminjaman);
+        a.setVisible(true);
+        
     }//GEN-LAST:event_btn_detailMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
