@@ -96,9 +96,6 @@ public class view_buku extends javax.swing.JFrame {
         tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
         model = new DefaultTableModel(null, tabelHeader);
         tbl_buku.setModel(model);
-        tbl_buku.getTableHeader().setOpaque(false);
-        tbl_buku.getTableHeader().setBackground(Color.red);
-        tbl_buku.getTableHeader().setForeground(Color.red);
         tbl_buku.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tbl_buku.getSelectedRow();
             if (baris >= 0) {
