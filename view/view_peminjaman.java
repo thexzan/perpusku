@@ -122,8 +122,9 @@ public class view_peminjaman extends javax.swing.JFrame {
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(640, 620));
+        setMinimumSize(new java.awt.Dimension(640, 450));
         setResizable(false);
+        setSize(new java.awt.Dimension(640, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_tambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
@@ -192,7 +193,7 @@ public class view_peminjaman extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabel.setPreferredSize(new java.awt.Dimension(480, 190));
+        tabel.setPreferredSize(new java.awt.Dimension(480, 210));
         tabel.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tabel.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setViewportView(tabel);
