@@ -10,6 +10,7 @@ import entity.ent_anggota;
 import factory.factory;
 import interfaces.int_anggota;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author xzan
  */
-public class view_pilih_peminjam extends javax.swing.JFrame {
+public class view_pilih_peminjam extends javax.swing.JDialog{
 
     private int baris;
     private String action;
@@ -26,10 +27,10 @@ public class view_pilih_peminjam extends javax.swing.JFrame {
     private final String[] tabelHeader;
     private final int_anggota anggotaDAO;
     private List<ent_anggota> listAnggota;
-
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
-    }
+    public view_peminjaman_baru pinjam = null;
+    
+    public int id_anggota;
+    public String nama,telpon,alamat;
 
     private void refresh_table() {
         listAnggota = anggotaDAO.get(cari.getText());
@@ -53,7 +54,8 @@ public class view_pilih_peminjam extends javax.swing.JFrame {
 
     }
 
-    public view_pilih_peminjam() {
+    public view_pilih_peminjam(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
 
@@ -65,6 +67,16 @@ public class view_pilih_peminjam extends javax.swing.JFrame {
         tabel.getColumnModel().getColumn(1).setPreferredWidth(150);
         tabel.getColumnModel().getColumn(2).setPreferredWidth(150);
         tabel.getColumnModel().getColumn(3).setPreferredWidth(150);
+        
+        tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            baris = tabel.getSelectedRow();
+            if (baris >= 0) {
+                id_anggota = Integer.parseInt((model.getValueAt(baris, 0).toString()));
+                nama = model.getValueAt(baris, 1).toString();
+                telpon = model.getValueAt(baris, 2).toString();
+                alamat = model.getValueAt(baris, 3).toString();
+            }
+        });
 
         refresh_table();
     }
@@ -161,7 +173,11 @@ public class view_pilih_peminjam extends javax.swing.JFrame {
     }//GEN-LAST:event_cariKeyReleased
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
-
+        pinjam.id_anggota = id_anggota;
+        pinjam.xnama = nama;
+        pinjam.xalamat = alamat;
+        pinjam.xtelpon = telpon;
+        this.dispose();
     }//GEN-LAST:event_btn_saveMouseClicked
 
     /**
@@ -201,7 +217,14 @@ public class view_pilih_peminjam extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new view_pilih_peminjam().setVisible(true);
+                view_pilih_peminjam dialog = new view_pilih_peminjam(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
