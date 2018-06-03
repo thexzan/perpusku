@@ -9,6 +9,8 @@ import java.awt.Color;
 import entity.ent_peminjaman;
 import factory.factory;
 import interfaces.int_peminjaman;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -40,11 +42,14 @@ public class view_peminjaman extends javax.swing.JFrame {
         model.setRowCount(0);
 
         listData.forEach((data) -> {
+            String oldstring = data.get(3);
+            LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+            String newstring = datetime.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
             model.addRow(new Object[]{
                 data.get(0),
                 data.get(1),
                 data.get(2),
-                data.get(3),
+                newstring,
                 data.get(4)
             });
         });
@@ -71,11 +76,11 @@ public class view_peminjaman extends javax.swing.JFrame {
                 id_peminjaman = Integer.parseInt((model.getValueAt(baris, 0).toString()));;
             }
         });
-        tabel.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tabel.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tabel.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tabel.getColumnModel().getColumn(3).setPreferredWidth(220);
-        tabel.getColumnModel().getColumn(3).setPreferredWidth(30);
+        tabel.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tabel.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tabel.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tabel.getColumnModel().getColumn(3).setPreferredWidth(160);
+        tabel.getColumnModel().getColumn(4).setPreferredWidth(60);
 
         refresh_table();
     }
@@ -151,9 +156,9 @@ public class view_peminjaman extends javax.swing.JFrame {
         });
         getContentPane().add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
 
-        tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
+        tbl_anggota.setBackground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setBorder(null);
-        tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
+        tbl_anggota.setForeground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         tbl_anggota.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -172,6 +177,7 @@ public class view_peminjaman extends javax.swing.JFrame {
         tabel.setPreferredSize(new java.awt.Dimension(480, 210));
         tabel.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tabel.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabel.setShowGrid(false);
         tbl_anggota.setViewportView(tabel);
 
         getContentPane().add(tbl_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 480, 220));
