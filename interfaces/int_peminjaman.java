@@ -12,8 +12,5 @@ import java.util.List;
  * @author xzan
  */
 public interface int_peminjaman {
-//    boolean insert(ent_buku b);
-//    boolean update(ent_buku b);
-//    boolean delete(String judul);
     List get(String cari);
 }

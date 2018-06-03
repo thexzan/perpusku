@@ -5,6 +5,7 @@
  */
 package view;
 
+import entity.ent_buku;
 import java.awt.Color;
 import entity.ent_peminjaman;
 import factory.factory;
@@ -12,6 +13,7 @@ import interfaces.int_peminjaman;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,7 +31,7 @@ public class view_peminjaman extends javax.swing.JFrame {
     private DefaultTableModel model;
     private final String[] tabelHeader;
     private final int_peminjaman peminjamanDAO;
-    private ArrayList<ArrayList<String>> listData;
+    private List<ent_peminjaman> listData;
     private ent_peminjaman a;
 
     private void clear_text() {
@@ -37,20 +39,21 @@ public class view_peminjaman extends javax.swing.JFrame {
     }
 
     private void refresh_table() {
-        listData = (ArrayList<ArrayList<String>>) peminjamanDAO.get(cari.getText());
+        listData = peminjamanDAO.get(cari.getText());
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
 
         listData.forEach((data) -> {
-            String oldstring = data.get(3);
-            LocalDateTime datetime = LocalDateTime.parse(oldstring, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
-            String newstring = datetime.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
+            String tanggal = data.getTanggal();
+            LocalDateTime datetime = LocalDateTime.parse(tanggal, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+            String tanggal_new = datetime.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
             model.addRow(new Object[]{
-                data.get(0),
-                data.get(1),
-                data.get(2),
-                newstring,
-                data.get(4)
+                data.getId(),
+                data.getNama(),
+                data.getTelpon(),
+                data.getJumlah_buku(),
+                tanggal_new,
+                data.getStatus(),
             });
         });
 
@@ -67,7 +70,7 @@ public class view_peminjaman extends javax.swing.JFrame {
         setLocationRelativeTo(null);
       
         peminjamanDAO = factory.getPeminjamanDA0();
-        tabelHeader = new String[]{"ID", "Nama", "Telpon", "Tanggal", "Status"};
+        tabelHeader = new String[]{"ID", "Nama", "Telpon", "# Buku", "Tanggal", "Status"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
@@ -76,11 +79,12 @@ public class view_peminjaman extends javax.swing.JFrame {
                 id_peminjaman = Integer.parseInt((model.getValueAt(baris, 0).toString()));;
             }
         });
-        tabel.getColumnModel().getColumn(0).setPreferredWidth(40);
-        tabel.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tabel.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tabel.getColumnModel().getColumn(1).setPreferredWidth(120);
         tabel.getColumnModel().getColumn(2).setPreferredWidth(80);
-        tabel.getColumnModel().getColumn(3).setPreferredWidth(160);
-        tabel.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tabel.getColumnModel().getColumn(3).setPreferredWidth(50);
+        tabel.getColumnModel().getColumn(4).setPreferredWidth(140);
+        tabel.getColumnModel().getColumn(5).setPreferredWidth(50);
 
         refresh_table();
     }
