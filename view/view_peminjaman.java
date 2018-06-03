@@ -5,14 +5,12 @@
  */
 package view;
 
-import entity.ent_buku;
 import java.awt.Color;
 import entity.ent_peminjaman;
 import factory.factory;
 import interfaces.int_peminjaman;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -53,8 +51,7 @@ public class view_peminjaman extends javax.swing.JFrame {
                 data.getTelpon(),
                 data.getJumlah_buku(),
                 tanggal_new,
-                data.getStatus(),
-            });
+                data.getStatus(),});
         });
 
         if (tabel.getRowCount() > 0) {
@@ -68,7 +65,7 @@ public class view_peminjaman extends javax.swing.JFrame {
     public view_peminjaman() {
         initComponents();
         setLocationRelativeTo(null);
-      
+
         peminjamanDAO = factory.getPeminjamanDA0();
         tabelHeader = new String[]{"ID", "Nama", "Telpon", "# Buku", "Tanggal", "Status"};
         model = new DefaultTableModel(null, tabelHeader);
@@ -239,9 +236,9 @@ public class view_peminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseClicked
-        view_peminjaman_detail a =  new view_peminjaman_detail(id_peminjaman);
+        view_peminjaman_detail a = new view_peminjaman_detail(id_peminjaman);
         a.setVisible(true);
-        
+
     }//GEN-LAST:event_btn_detailMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased

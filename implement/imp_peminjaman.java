@@ -45,7 +45,7 @@ public class imp_peminjaman implements int_peminjaman {
 
                 while (data.next()) {
                     ent_peminjaman x = new ent_peminjaman();
-                   
+
                     x.setId(data.getInt("id_peminjaman"));
                     x.setNama(data.getString("nama"));
                     x.setTelpon(data.getString("telpon"));
@@ -54,7 +54,7 @@ public class imp_peminjaman implements int_peminjaman {
                     x.setTanggal_kembali(data.getString("tanggal_kembali"));
                     x.setStatus(data.getString("status"));
                     x.setDenda(data.getInt("denda"));
-                    
+
                     listPeminjaman.add(x);
                 }
                 data.close();
