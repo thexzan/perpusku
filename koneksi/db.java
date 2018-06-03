@@ -16,7 +16,7 @@ public class db {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 try {
-                    String url = "jdbc:mysql://localhost:3306/perpusku";
+                    String url = "jdbc:mysql://localhost:3306/perpusku?zeroDateTimeBehavior=convertToNull";
                     conn = DriverManager.getConnection(url, "root", "root");
                     System.out.println("KONEKSI SUKSES");
                 } catch (SQLException se) {
