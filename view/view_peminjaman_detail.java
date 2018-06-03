@@ -5,10 +5,12 @@
  */
 package view;
 
+import entity.ent_anggota;
+import entity.ent_buku;
 import java.awt.Color;
 import factory.factory;
 import interfaces.int_peminjaman_detail;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,19 +27,19 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     private DefaultTableModel model;
     private String[] tabelHeader;
     private int_peminjaman_detail peminjamanDetailDAO;
-    private ArrayList<ArrayList<String>> listBuku;
-    private ArrayList<String> Anggota;
+    private List<ent_buku> listBuku;
+    private List<ent_anggota> Anggota;
     public int id_peminjaman;
 
     private void refresh_table() {
-        listBuku = (ArrayList<ArrayList<String>>) peminjamanDetailDAO.get_buku(id_peminjaman);
+        listBuku = peminjamanDetailDAO.get_buku(id_peminjaman);
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
 
         listBuku.forEach((data) -> {
             model.addRow(new Object[]{
-                data.get(0),
-                data.get(1)
+                data.getJudul(),
+                data.getKategori()
             });
         });
 
@@ -57,11 +59,8 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }
 
     public view_peminjaman_detail() {
-//        initComponents();
-//        table_setting();
-//        setLocationRelativeTo(this);
-//        refresh_table();
-//        System.out.print("HEY");
+        System.out.print("You can't run this directly!");
+        System.exit(1);
     }
 
     public view_peminjaman_detail(int a) {
@@ -74,11 +73,11 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         table_setting();
         refresh_table();
 
-        Anggota = (ArrayList<String>) peminjamanDetailDAO.get_peminjam(id_peminjaman);
-        nama.setText(Anggota.get(0));
-        telpon.setText(Anggota.get(1));
-        alamat.setText(Anggota.get(2));
-        
+        Anggota = peminjamanDetailDAO.get_peminjam(id_peminjaman);
+
+        nama.setText(Anggota.get(0).getNama());
+        telpon.setText(Anggota.get(0).getTelpon());
+        alamat.setText(Anggota.get(0).getAlamat());
     }
 
     /**

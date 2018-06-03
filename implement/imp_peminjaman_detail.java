@@ -5,6 +5,8 @@
  */
 package implement;
 
+import entity.ent_anggota;
+import entity.ent_buku;
 import interfaces.int_peminjaman_detail;
 import java.sql.PreparedStatement;
 import koneksi.db;
@@ -23,8 +25,8 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
     private final db db;
     private boolean status;
     private ResultSet data;
-    private ArrayList<ArrayList<String>> listPeminjaman;
-    private ArrayList<String> listAnggota;
+    private List<ent_buku> listBuku;
+    private List<ent_anggota> listAnggota;
     private PreparedStatement ps;
 
     public imp_peminjaman_detail() {
@@ -41,18 +43,18 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
             status = db.execute(ps, true);
             if (status) {
                 data = db.get_hasil();
-                listPeminjaman =new ArrayList<ArrayList<String>>();
+                listBuku = new ArrayList<>();
 
                 while (data.next()) {
-                     ArrayList<String> x = new ArrayList<String>();
-                   
-                    x.add(data.getString("judul"));
-                    x.add(data.getString("kategori"));
-                    listPeminjaman.add(x);
+                    ent_buku x = new ent_buku();
+
+                    x.setJudul(data.getString("judul"));
+                    x.setKategori(data.getString("kategori"));
+                    listBuku.add(x);
                 }
                 data.close();
-                
-                return listPeminjaman;
+
+                return listBuku;
             }
         } catch (SQLException e) {
             System.out.println("QUERY GET BUKU SALAH = " + e.getMessage());
@@ -63,26 +65,28 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
 
     @Override
     public List get_peminjam(int cari) {
-         try {
+        try {
             ps = db.connect().prepareStatement("select nama,telpon,alamat from  detail_peminjaman d join peminjaman p on p.id = d.id_peminjaman join anggota a on a.id = p.id_anggota where id_peminjaman = ? group by id_peminjaman");
-            ps.setInt(1,cari);
+            ps.setInt(1, cari);
+            listAnggota = new ArrayList<>();
 
             status = db.execute(ps, true);
             if (status) {
                 data = db.get_hasil();
-                listAnggota =new ArrayList<String>();
+                while (data.next()) {
+                    ent_anggota x = new ent_anggota();
 
-                while (data.next()) {                   
-                    listAnggota.add(data.getString("nama"));
-                    listAnggota.add(data.getString("telpon"));
-                    listAnggota.add(data.getString("alamat"));
+                    x.setNama(data.getString("nama"));
+                    x.setTelpon(data.getString("telpon"));
+                    x.setAlamat(data.getString("alamat"));
+                    listAnggota.add(x);
                 }
                 data.close();
                 return listAnggota;
-                
-                
-                
             }
+
+            ent_anggota x = new ent_anggota();
+            System.out.print(x.getNama());
         } catch (SQLException e) {
             System.out.println("QUERY GET ANGGOTA SALAH = " + e.getMessage());
             System.exit(0);
