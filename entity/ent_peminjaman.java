@@ -11,6 +11,8 @@ package entity;
  */
 public class ent_peminjaman {
     private int id;
+    private int id_anggota;
+    private int id_buku;
     private String nama;
     private String telpon;
     private int jumlah_buku;
@@ -25,6 +27,22 @@ public class ent_peminjaman {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId_anggota() {
+        return id_anggota;
+    }
+
+    public void setId_anggota(int id_anggota) {
+        this.id_anggota = id_anggota;
+    }
+
+    public int getId_buku() {
+        return id_buku;
+    }
+
+    public void setId_buku(int id_buku) {
+        this.id_buku = id_buku;
     }
 
     public String getNama() {
@@ -84,7 +102,6 @@ public class ent_peminjaman {
     }
 
     
-    
-    
 
+    
 }

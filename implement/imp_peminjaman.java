@@ -67,4 +67,60 @@ public class imp_peminjaman implements int_peminjaman {
         return null;
     }
 
+    @Override
+    public int get_insert_id() {
+        int id = 0;
+        try {
+            ps = db.connect().prepareStatement("SELECT id from peminjaman order by id desc limit 1");
+            status = db.execute(ps, true);
+            if (status) {
+                data = db.get_hasil();
+                while (data.next()) {
+
+                    id = data.getInt("id");
+                }
+                data.close();
+                
+            }
+        } catch (SQLException e) {
+            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return id;
+    }
+    
+    @Override
+    public boolean insert(ent_peminjaman x) {
+        status = false;
+        try {
+            ps = db.connect().prepareStatement("INSERT INTO peminjaman (id_anggota) VALUES ( ? )");
+            ps.setInt(1, x.getId_anggota());
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY INSERT SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return status;
+    }
+
+    @Override
+    public boolean insertDetail(ent_peminjaman x) {
+        status = false;
+        int id_peminjaman = this.get_insert_id();
+        try {
+            ps = db.connect().prepareStatement("INSERT INTO detail_peminjaman VALUES (?, ?)");
+            ps.setInt(1, id_peminjaman);
+            ps.setInt(2, x.getId_buku());
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY INSERT DETAIL SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return status;
+    }
+
+    
+
 }

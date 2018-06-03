@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package interfaces;
-import entity.ent_buku;
+import entity.ent_peminjaman;
 import java.util.List;
 
 /**
@@ -13,4 +13,7 @@ import java.util.List;
  */
 public interface int_peminjaman {
     List get(String cari);
+    int get_insert_id();
+    boolean insert(ent_peminjaman x);
+    boolean insertDetail(ent_peminjaman x);
 }

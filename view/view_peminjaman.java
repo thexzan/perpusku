@@ -73,7 +73,8 @@ public class view_peminjaman extends javax.swing.JFrame {
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tabel.getSelectedRow();
             if (baris >= 0) {
-                id_peminjaman = Integer.parseInt((model.getValueAt(baris, 0).toString()));;
+                id_peminjaman = Integer.parseInt((model.getValueAt(baris, 0).toString()));
+//                System.out.println(id_peminjaman);
             }
         });
         tabel.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -84,6 +85,7 @@ public class view_peminjaman extends javax.swing.JFrame {
         tabel.getColumnModel().getColumn(5).setPreferredWidth(50);
 
         refresh_table();
+   
     }
 
     /**
@@ -227,12 +229,9 @@ public class view_peminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_detailMouseEntered
 
     private void btn_tambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahMouseClicked
-        clear_text();
-        action = "INSERT";
-
-//        nama.setEnabled(true);
-//        nama.setEditable(true);
-//        nama.requestFocus();
+        view_peminjaman_baru x = new view_peminjaman_baru();
+        x.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseClicked
