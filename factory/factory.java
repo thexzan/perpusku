@@ -23,26 +23,25 @@ public class factory {
         bukuDAO = new imp_buku();
         return bukuDAO;
     }
-    
+
     public static int_anggota getAnggotaDA0() {
         anggotaDAO = new imp_anggota();
         return anggotaDAO;
     }
-    
+
     public static int_peminjaman getPeminjamanDA0() {
         peminjamanDAO = new imp_peminjaman();
         return peminjamanDAO;
     }
-    
+
     public static int_peminjaman_detail getPeminjamanDetailDA0() {
         peminjamanDetailDAO = new imp_peminjaman_detail();
         return peminjamanDetailDAO;
     }
-    
+
     public static int_login getLoginDA0() {
         loginDAO = new imp_login();
         return loginDAO;
     }
-    
 
 }

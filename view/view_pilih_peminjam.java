@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author xzan
  */
-public class view_pilih_peminjam extends javax.swing.JDialog{
+public class view_pilih_peminjam extends javax.swing.JDialog {
 
     private int baris;
     private String action;
@@ -28,9 +28,9 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
     private final int_anggota anggotaDAO;
     private List<ent_anggota> listAnggota;
     public view_peminjaman_baru pinjam = null;
-    
+
     public int id_anggota;
-    public String nama,telpon,alamat;
+    public String nama, telpon, alamat;
 
     private void refresh_table() {
         listAnggota = anggotaDAO.get(cari.getText());
@@ -67,7 +67,7 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
         tabel.getColumnModel().getColumn(1).setPreferredWidth(150);
         tabel.getColumnModel().getColumn(2).setPreferredWidth(150);
         tabel.getColumnModel().getColumn(3).setPreferredWidth(150);
-        
+
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tabel.getSelectedRow();
             if (baris >= 0) {

@@ -12,14 +12,9 @@ import java.awt.Color;
 import factory.factory;
 import interfaces.int_peminjaman;
 import interfaces.int_peminjaman_detail;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -81,6 +76,9 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         nama.setEnabled(false);
         telpon.setEnabled(false);
         alamat.setEditable(false);
+        denda.setEnabled(false);
+        tanggal.setEnabled(false);
+        kembali.setEnabled(false);
         setLocationRelativeTo(this);
         table_setting();
         refresh_table();
@@ -99,16 +97,14 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         String tanggal_newx = hari_ini.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
 
         tanggal.setText(tanggal_new);
-//        kembali.setText(Peminjaman.get(0).getTanggal_kembali());
         kembali.setText(tanggal_newx);
-        denda.setText("Rp. "+String.valueOf(Peminjaman.get(0).getDenda()));
+        denda.setText("Rp. " + String.valueOf(Peminjaman.get(0).getDenda()));
 
         if (Peminjaman.get(0).getStatus().equals("selesai")) {
             btn_kembali.setVisible(false);
             btn_delete.setVisible(false);
         }
-        
-        
+
     }
 
     /**
@@ -256,7 +252,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         alamat.setBackground(new java.awt.Color(255, 255, 255));
         alamat.setColumns(20);
         alamat.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        alamat.setForeground(new java.awt.Color(0, 0, 0));
+        alamat.setForeground(new java.awt.Color(91, 91, 95));
         alamat.setRows(5);
         alamat.setBorder(null);
         alamat.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -308,15 +304,15 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_kembaliMouseEntered
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseExited
-         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png")));
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png")));
     }//GEN-LAST:event_btn_deleteMouseExited
 
     private void btn_deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseEntered
-       btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete_hover.png")));
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete_hover.png")));
     }//GEN-LAST:event_btn_deleteMouseEntered
 
     /**

@@ -11,7 +11,6 @@ import factory.factory;
 import interfaces.int_peminjaman;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -246,10 +245,10 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             view_peminjaman v = new view_peminjaman();
             v.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Silakan diisi dengan benar", "Informasi", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_btn_saveMouseClicked
 
     private void btn_saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseExited

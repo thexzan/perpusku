@@ -35,7 +35,7 @@ public class imp_login implements int_login {
             db.execute(ps, true);
             ResultSet rs = db.get_hasil();
             rs.last();
-            
+
             if (rs.getRow() == 1) {
                 status = true;
             }

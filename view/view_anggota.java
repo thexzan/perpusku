@@ -393,13 +393,13 @@ public class view_anggota extends javax.swing.JFrame {
         a.setNama(nama.getText());
         a.setTelpon(telpon.getText());
         a.setAlamat(alamat.getText());
-        
+
         if (!isNumeric(a.getTelpon())) {
             JOptionPane.showMessageDialog(null, "Silakan isi No Telpon dengan ANGKA");
             telpon.setText("");
         }
 
-        if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")){
+        if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")) {
             JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
         } else {
             if (action.equalsIgnoreCase("INSERT")) {

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author xzan
  */
-public class view_pilih_buku extends javax.swing.JDialog{
+public class view_pilih_buku extends javax.swing.JDialog {
 
     private int baris;
     private String action;
@@ -28,8 +28,8 @@ public class view_pilih_buku extends javax.swing.JDialog{
     private final int_buku bukuDAO;
     private List<ent_buku> listBuku;
     public view_peminjaman_baru pinjam = null;
-    
-    public String judul,kategori;
+
+    public String judul, kategori;
     public int id_buku;
 
     private void refresh_table() {
@@ -59,10 +59,10 @@ public class view_pilih_buku extends javax.swing.JDialog{
         setLocationRelativeTo(null);
 
         bukuDAO = factory.getBukuDA0();
-        tabelHeader = new String[]{"ID","Judul", "Kategori"};
+        tabelHeader = new String[]{"ID", "Judul", "Kategori"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
-        
+
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tabel.getSelectedRow();
             if (baris >= 0) {

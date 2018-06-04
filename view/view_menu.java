@@ -151,22 +151,22 @@ public class view_menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutMouseExited
 
     private void btn_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseEntered
-       btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_logout_hover.png")));
+        btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_logout_hover.png")));
     }//GEN-LAST:event_btn_logoutMouseEntered
 
     private void btn_bukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_bukuMouseClicked
-       view_buku x = new view_buku();
-       x.setVisible(true);
+        view_buku x = new view_buku();
+        x.setVisible(true);
     }//GEN-LAST:event_btn_bukuMouseClicked
 
     private void btn_anggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_anggotaMouseClicked
-       view_anggota x = new view_anggota();
-       x.setVisible(true);
+        view_anggota x = new view_anggota();
+        x.setVisible(true);
     }//GEN-LAST:event_btn_anggotaMouseClicked
 
     private void btn_sirkulasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sirkulasiMouseClicked
-       view_peminjaman x = new view_peminjaman();
-       x.setVisible(true);
+        view_peminjaman x = new view_peminjaman();
+        x.setVisible(true);
     }//GEN-LAST:event_btn_sirkulasiMouseClicked
 
     private void btn_laporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseClicked

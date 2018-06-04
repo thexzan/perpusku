@@ -10,7 +10,6 @@ import entity.ent_login;
 import factory.factory;
 import interfaces.int_login;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +21,6 @@ public class view_login extends javax.swing.JFrame {
     private int baris;
     private String action;
     private boolean status;
-    private DefaultTableModel model;
     private final int_login loginDAO;
     private ent_login x;
 

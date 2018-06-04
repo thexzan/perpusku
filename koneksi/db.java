@@ -18,7 +18,7 @@ public class db {
                 try {
                     String url = "jdbc:mysql://localhost:3306/perpusku?zeroDateTimeBehavior=convertToNull";
                     conn = DriverManager.getConnection(url, "root", "root");
-                    System.out.println("KONEKSI SUKSES");
+//                    System.out.println("KONEKSI SUKSES");
                 } catch (SQLException se) {
                     System.out.println("KONEKSI GAGAL = " + se.getMessage());
                     System.exit(0);
