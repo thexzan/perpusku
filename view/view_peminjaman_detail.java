@@ -12,6 +12,8 @@ import java.awt.Color;
 import factory.factory;
 import interfaces.int_peminjaman;
 import interfaces.int_peminjaman_detail;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -104,6 +106,14 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
             btn_kembali.setVisible(false);
             btn_delete.setVisible(false);
         }
+        
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                view_peminjaman x = new view_peminjaman();
+                x.setVisible(true);
+                dispose();
+            }
+        });
 
     }
 

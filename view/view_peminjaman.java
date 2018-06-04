@@ -12,6 +12,7 @@ import interfaces.int_peminjaman;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,6 +41,7 @@ public class view_peminjaman extends javax.swing.JFrame {
         listData = peminjamanDAO.get(cari.getText());
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
+        btn_detail.setVisible(false);
 
         listData.forEach((data) -> {
             String tanggal = data.getTanggal();
@@ -58,6 +60,7 @@ public class view_peminjaman extends javax.swing.JFrame {
             baris = tabel.getRowCount() - 1;
             tabel.setRowSelectionInterval(baris, baris);
             action = "";
+            btn_detail.setVisible(true);
         }
 
     }
@@ -235,9 +238,15 @@ public class view_peminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_tambahMouseClicked
 
     private void btn_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseClicked
-        view_peminjaman_detail a = new view_peminjaman_detail(id_peminjaman);
-        a.setVisible(true);
-        dispose();
+        int row = tabel.getSelectedRow();
+        
+        if (row != -1) {
+            view_peminjaman_detail a = new view_peminjaman_detail(id_peminjaman);
+            a.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Silakan pilih mana yang mau dilihat detail");
+        }
 
     }//GEN-LAST:event_btn_detailMouseClicked
 
