@@ -105,7 +105,10 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
 
         if (Peminjaman.get(0).getStatus().equals("selesai")) {
             btn_kembali.setVisible(false);
+            btn_delete.setVisible(false);
         }
+        
+        
     }
 
     /**
