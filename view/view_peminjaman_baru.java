@@ -36,6 +36,7 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
     public view_peminjaman_baru() {
         initComponents();
         setLocationRelativeTo(null);
+        btn_hapus.setVisible(false);
 
         peminjamanDAO = factory.getPeminjamanDA0();
         tabelHeader = new String[]{"ID", "Judul", "Kategori"};
@@ -212,6 +213,9 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Maksimal Pinjam 3");
         }
         jml_buku = tabel.getRowCount();
+        if(jml_buku > 0){
+            btn_hapus.setVisible(true);
+        }
         System.out.print(jml_buku);
     }//GEN-LAST:event_btn_add_bukuMouseClicked
 
@@ -281,6 +285,9 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         int row = tabel.getSelectedRow();
         model.removeRow(row);
         jml_buku = jml_buku - 1;
+        if(jml_buku < 1){
+            btn_hapus.setVisible(false);
+        }
     }//GEN-LAST:event_btn_hapusMouseClicked
 
     private void btn_hapusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseExited
