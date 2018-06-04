@@ -101,7 +101,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         tanggal.setText(tanggal_new);
 //        kembali.setText(Peminjaman.get(0).getTanggal_kembali());
         kembali.setText(tanggal_newx);
-        denda.setText(String.valueOf(Peminjaman.get(0).getDenda()));
+        denda.setText("Rp. "+String.valueOf(Peminjaman.get(0).getDenda()));
 
         if (Peminjaman.get(0).getStatus().equals("selesai")) {
             btn_kembali.setVisible(false);
