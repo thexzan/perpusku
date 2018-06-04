@@ -41,8 +41,8 @@ public class view_login extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_login = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
         username = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,6 +66,12 @@ public class view_login extends javax.swing.JFrame {
         });
         getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 318, 60, -1));
 
+        password.setBackground(new Color(0,0,0,0));
+        password.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        password.setForeground(new java.awt.Color(0, 0, 0));
+        password.setBorder(null);
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 269, 220, 30));
+
         username.setBackground(new Color(0,0,0,0));
         username.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
         username.setForeground(new java.awt.Color(0, 0, 0));
@@ -73,14 +79,6 @@ public class view_login extends javax.swing.JFrame {
         username.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         username.setSelectionColor(new java.awt.Color(0, 122, 255));
         getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 199, 220, 30));
-
-        password.setBackground(new Color(0,0,0,0));
-        password.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
-        password.setForeground(new java.awt.Color(0, 0, 0));
-        password.setBorder(null);
-        password.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        password.setSelectionColor(new java.awt.Color(0, 122, 255));
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 269, 220, 30));
 
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_login.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -152,7 +150,7 @@ public class view_login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
     private javax.swing.JLabel btn_login;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
