@@ -103,14 +103,14 @@ public class view_login extends javax.swing.JFrame {
         x.setUsername(username.getText());
         x.setPassword(password.getText());
         boolean login = loginDAO.cek_login(x);
-        
-        if (login){
+
+        if (login) {
             this.dispose();
-            System.out.print("YESSS LOGIN");
-//            new view().setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null,"Username / Password Tidak Cocok!");
-        } 
+            view_menu x = new view_menu();
+            x.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Username / Password Tidak Cocok!");
+        }
     }//GEN-LAST:event_btn_loginMouseClicked
 
     /**
