@@ -7,10 +7,20 @@ package view;
 
 import entity.ent_anggota;
 import entity.ent_buku;
+import entity.ent_peminjaman;
 import java.awt.Color;
 import factory.factory;
+import interfaces.int_peminjaman;
 import interfaces.int_peminjaman_detail;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,8 +37,10 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     private DefaultTableModel model;
     private String[] tabelHeader;
     private int_peminjaman_detail peminjamanDetailDAO;
+    private int_peminjaman peminjamanDAO;
     private List<ent_buku> listBuku;
     private List<ent_anggota> Anggota;
+    private List<ent_peminjaman> Peminjaman;
     public int id_peminjaman;
 
     private void refresh_table() {
@@ -74,10 +86,26 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         refresh_table();
 
         Anggota = peminjamanDetailDAO.get_peminjam(id_peminjaman);
+        Peminjaman = peminjamanDetailDAO.get_data_peminjaman(id_peminjaman);
 
         nama.setText(Anggota.get(0).getNama());
         telpon.setText(Anggota.get(0).getTelpon());
         alamat.setText(Anggota.get(0).getAlamat());
+
+        String tanggalx = Peminjaman.get(0).getTanggal();
+        LocalDateTime tanggalx_new = LocalDateTime.parse(tanggalx, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+        String tanggal_new = tanggalx_new.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
+        LocalDateTime hari_ini = LocalDateTime.now();
+        String tanggal_newx = hari_ini.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
+
+        tanggal.setText(tanggal_new);
+//        kembali.setText(Peminjaman.get(0).getTanggal_kembali());
+        kembali.setText(tanggal_newx);
+        denda.setText(String.valueOf(Peminjaman.get(0).getDenda()));
+
+        if (Peminjaman.get(0).getStatus().equals("selesai")) {
+            btn_kembali.setVisible(false);
+        }
     }
 
     /**
@@ -89,34 +117,38 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_hapus = new javax.swing.JLabel();
+        btn_close = new javax.swing.JLabel();
         tbl_anggota = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
+        tanggal = new javax.swing.JTextField();
+        btn_kembali = new javax.swing.JLabel();
         nama = new javax.swing.JTextField();
+        kembali = new javax.swing.JTextField();
+        denda = new javax.swing.JTextField();
         telpon = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         alamat = new javax.swing.JTextArea();
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 660));
         setResizable(false);
-        setSize(new java.awt.Dimension(640, 480));
+        setSize(new java.awt.Dimension(640, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
-        btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
+        btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_hapusMouseClicked(evt);
+                btn_closeMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_hapusMouseExited(evt);
+                btn_closeMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_hapusMouseEntered(evt);
+                btn_closeMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
+        getContentPane().add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
@@ -143,6 +175,28 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
 
         getContentPane().add(tbl_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 480, 80));
 
+        tanggal.setBackground(new Color(0,0,0,0));
+        tanggal.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        tanggal.setForeground(new java.awt.Color(0, 0, 0));
+        tanggal.setBorder(null);
+        tanggal.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        tanggal.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 505, 220, 30));
+
+        btn_kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
+        btn_kembali.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_kembaliMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_kembaliMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_kembaliMouseEntered(evt);
+            }
+        });
+        getContentPane().add(btn_kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
+
         nama.setBackground(new Color(0,0,0,0));
         nama.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
         nama.setForeground(new java.awt.Color(0, 0, 0));
@@ -150,6 +204,22 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         nama.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         nama.setSelectionColor(new java.awt.Color(0, 122, 255));
         getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 200, 220, 30));
+
+        kembali.setBackground(new Color(0,0,0,0));
+        kembali.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        kembali.setForeground(new java.awt.Color(0, 0, 0));
+        kembali.setBorder(null);
+        kembali.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        kembali.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 575, 220, 30));
+
+        denda.setBackground(new Color(0,0,0,0));
+        denda.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
+        denda.setForeground(new java.awt.Color(0, 0, 0));
+        denda.setBorder(null);
+        denda.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        denda.setSelectionColor(new java.awt.Color(0, 122, 255));
+        getContentPane().add(denda, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 505, 220, 30));
 
         telpon.setBackground(new Color(0,0,0,0));
         telpon.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
@@ -176,23 +246,48 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 230, 100));
 
-        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_peminjaman_detail.png"))); // NOI18N
+        bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg_peminjaman_detail_2.png"))); // NOI18N
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_hapusMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseExited
-        btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png")));
-    }//GEN-LAST:event_btn_hapusMouseExited
+    private void btn_closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseExited
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png")));
+    }//GEN-LAST:event_btn_closeMouseExited
 
-    private void btn_hapusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseEntered
-        btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
-    }//GEN-LAST:event_btn_hapusMouseEntered
+    private void btn_closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseEntered
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
+    }//GEN-LAST:event_btn_closeMouseEntered
 
-    private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
+    private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
+        view_peminjaman x = new view_peminjaman();
+        x.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btn_hapusMouseClicked
+    }//GEN-LAST:event_btn_closeMouseClicked
+
+    private void btn_kembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseClicked
+        if (JOptionPane.showConfirmDialog(null, "Yakin sudah kembali?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            status = peminjamanDetailDAO.kembali(id_peminjaman);
+
+            if (status == false) {
+                JOptionPane.showMessageDialog(null, "Gagal Mengembalikan!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "SUKSES Pengembalian Selesai!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                view_peminjaman x = new view_peminjaman();
+                x.setVisible(true);
+                dispose();
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_kembaliMouseClicked
+
+    private void btn_kembaliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_kembaliMouseExited
+
+    private void btn_kembaliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_kembaliMouseEntered
 
     /**
      * @param args the command line arguments
@@ -247,10 +342,14 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alamat;
     private javax.swing.JLabel bg;
-    private javax.swing.JLabel btn_hapus;
+    private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel btn_kembali;
+    private javax.swing.JTextField denda;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField kembali;
     private javax.swing.JTextField nama;
     private javax.swing.JTable tabel;
+    private javax.swing.JTextField tanggal;
     private javax.swing.JScrollPane tbl_anggota;
     private javax.swing.JTextField telpon;
     // End of variables declaration//GEN-END:variables

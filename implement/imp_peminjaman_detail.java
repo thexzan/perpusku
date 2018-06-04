@@ -7,6 +7,7 @@ package implement;
 
 import entity.ent_anggota;
 import entity.ent_buku;
+import entity.ent_peminjaman;
 import interfaces.int_peminjaman_detail;
 import java.sql.PreparedStatement;
 import koneksi.db;
@@ -27,6 +28,7 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
     private ResultSet data;
     private List<ent_buku> listBuku;
     private List<ent_anggota> listAnggota;
+    private List<ent_peminjaman> listPeminjaman;
     private PreparedStatement ps;
 
     public imp_peminjaman_detail() {
@@ -66,7 +68,7 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
     @Override
     public List get_peminjam(int cari) {
         try {
-            ps = db.connect().prepareStatement("select nama,telpon,alamat from  detail_peminjaman d join peminjaman p on p.id = d.id_peminjaman join anggota a on a.id = p.id_anggota where id_peminjaman = ? group by id_peminjaman");
+            ps = db.connect().prepareStatement("select nama,telpon,alamat from detail_peminjaman d join peminjaman p on p.id = d.id_peminjaman join anggota a on a.id = p.id_anggota where id_peminjaman = ? group by id_peminjaman");
             ps.setInt(1, cari);
             listAnggota = new ArrayList<>();
 
@@ -85,13 +87,56 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
                 return listAnggota;
             }
 
-            ent_anggota x = new ent_anggota();
-            System.out.print(x.getNama());
         } catch (SQLException e) {
             System.out.println("QUERY GET ANGGOTA SALAH = " + e.getMessage());
             System.exit(0);
         }
         return null;
+    }
+
+    @Override
+    public List get_data_peminjaman(int cari) {
+        try {
+            ps = db.connect().prepareStatement("select tanggal,tanggal_kembali,if(tanggal_kembali != \"0000-00-00 00:00:00\" AND datediff(now(),tanggal)> 7,(datediff(now(),tanggal)*500),denda) as denda,status from detail_peminjaman d join peminjaman p on p.id = d.id_peminjaman where id_peminjaman = ? group by id_peminjaman");
+            ps.setInt(1, cari);
+            listPeminjaman = new ArrayList<>();
+
+            status = db.execute(ps, true);
+            if (status) {
+                data = db.get_hasil();
+                while (data.next()) {
+                    ent_peminjaman x = new ent_peminjaman();
+
+                    x.setTanggal(data.getString("tanggal"));
+                    x.setTanggal_kembali(data.getString("tanggal_kembali"));
+                    x.setDenda(data.getInt("denda"));
+                    x.setStatus(data.getString("status"));
+                    listPeminjaman.add(x);
+                }
+                data.close();
+                return listPeminjaman;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("QUERY GET DATA PEMINJAMAN SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean kembali(int b) {
+        status = false;
+        try {
+            ps = db.connect().prepareStatement("UPDATE peminjaman SET status = 'selesai', tanggal_kembali = now(), denda = if(tanggal_kembali != \"0000-00-00 00:00:00\" AND status != \"aktif\" AND datediff(tanggal_kembali,tanggal)> 7,(datediff(tanggal_kembali,tanggal)*500),denda) WHERE id = ?");
+            ps.setInt(1, b);
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY PENGEMBALIAN BUKU SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return status;
     }
 
 }

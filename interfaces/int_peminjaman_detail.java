@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package interfaces;
+import entity.ent_peminjaman;
 import java.util.List;
 
 /**
@@ -13,4 +14,6 @@ import java.util.List;
 public interface int_peminjaman_detail {
     List get_buku(int cari);
     List get_peminjam(int cari);
+    List get_data_peminjaman(int cari);
+    boolean kembali(int id);
 }

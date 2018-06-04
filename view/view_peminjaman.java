@@ -85,7 +85,7 @@ public class view_peminjaman extends javax.swing.JFrame {
         tabel.getColumnModel().getColumn(5).setPreferredWidth(50);
 
         refresh_table();
-   
+
     }
 
     /**
@@ -237,6 +237,7 @@ public class view_peminjaman extends javax.swing.JFrame {
     private void btn_detailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailMouseClicked
         view_peminjaman_detail a = new view_peminjaman_detail(id_peminjaman);
         a.setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_btn_detailMouseClicked
 
