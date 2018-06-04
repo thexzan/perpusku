@@ -16,4 +16,5 @@ public interface int_peminjaman_detail {
     List get_peminjam(int cari);
     List get_data_peminjaman(int cari);
     boolean kembali(int id);
+    boolean delete(int id_peminjaman);
 }

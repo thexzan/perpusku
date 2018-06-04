@@ -139,4 +139,19 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
         return status;
     }
 
+    
+    @Override
+    public boolean delete(int id_peminjaman) {
+        status = false;
+        try {
+            ps = db.connect().prepareStatement("DELETE FROM peminjaman WHERE id = ?");
+            ps.setInt(1, id_peminjaman);
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY DELETE PEMINJAMAN SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return status;
+    }
 }

@@ -304,7 +304,17 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_kembaliMouseEntered
 
     private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
+        if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            status = peminjamanDetailDAO.delete(id_peminjaman);
 
+            if (status == false) {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                view_peminjaman x = new view_peminjaman();
+                x.setVisible(true);
+                dispose();
+            }
+        }
     }//GEN-LAST:event_btn_deleteMouseClicked
 
     private void btn_deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseExited
