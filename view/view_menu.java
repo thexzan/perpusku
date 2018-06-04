@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author xzan
@@ -17,6 +20,14 @@ public class view_menu extends javax.swing.JFrame {
     public view_menu() {
         initComponents();
         setLocationRelativeTo(this);
+        
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                view_login x = new view_login();
+                x.setVisible(true);
+                dispose();
+            }
+        });
     }
 
     /**
@@ -35,7 +46,7 @@ public class view_menu extends javax.swing.JFrame {
         btn_sirkulasi = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_logout.png"))); // NOI18N
@@ -174,7 +185,9 @@ public class view_menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_laporanMouseClicked
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
-        dispose();        // TODO add your handling code here:
+        view_login x = new view_login();
+        x.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btn_logoutMouseClicked
 
     /**
