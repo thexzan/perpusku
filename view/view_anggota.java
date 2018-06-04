@@ -397,22 +397,23 @@ public class view_anggota extends javax.swing.JFrame {
         if (!isNumeric(a.getTelpon())) {
             JOptionPane.showMessageDialog(null, "Silakan isi No Telpon dengan ANGKA");
             telpon.setText("");
-        }
-
-        if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")) {
-            JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
+            telpon.requestFocus();
         } else {
-            if (action.equalsIgnoreCase("INSERT")) {
-                status = anggotaDAO.insert(a);
+            if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")) {
+                JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
             } else {
-                status = anggotaDAO.update(a);
+                if (action.equalsIgnoreCase("INSERT")) {
+                    status = anggotaDAO.insert(a);
+                } else {
+                    status = anggotaDAO.update(a);
+                }
+                if (status == false) {
+                    JOptionPane.showMessageDialog(null, "Data gagal disimpan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                }
+                refresh_table();
+                enable_text(false);
+                default_button(true);
             }
-            if (status == false) {
-                JOptionPane.showMessageDialog(null, "Data gagal disimpan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            }
-            refresh_table();
-            enable_text(false);
-            default_button(true);
         }
     }//GEN-LAST:event_btn_saveMouseClicked
 
