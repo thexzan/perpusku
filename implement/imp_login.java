@@ -14,30 +14,29 @@ import koneksi.db;
 
 /**
  *
- * @author My Komputer
+ * @author xzan
  */
-public class imp_login implements int_login{
+public class imp_login implements int_login {
+
     private final db db;
-    private boolean status;
-    private PreparedStatement ps;
 
     public imp_login() {
         db = new db();
         db.connect();
     }
-    
+
     public boolean cek_login(ent_login e) {
-        status = false;
+        boolean status = false;
         try {
-            ps = db.connect().prepareStatement("select * from admin where username = ? and password = ?");
+            PreparedStatement ps = db.connect().prepareStatement("select * from admin where username = ? and password = ?");
             ps.setString(1, e.getUsername());
             ps.setString(2, e.getPassword());
 
             db.execute(ps, true);
             ResultSet rs = db.get_hasil();
             rs.last();
-            int baris = rs.getRow();
-            if (baris == 1) {
+            
+            if (rs.getRow() == 1) {
                 status = true;
             }
         } catch (SQLException er) {
@@ -45,6 +44,6 @@ public class imp_login implements int_login{
             System.exit(0);
         }
         return status;
-        
+
     }
 }
