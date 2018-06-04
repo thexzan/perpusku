@@ -9,6 +9,9 @@ import java.awt.Color;
 import entity.ent_login;
 import factory.factory;
 import interfaces.int_login;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,11 +27,35 @@ public class view_login extends javax.swing.JFrame {
     private final int_login loginDAO;
     private ent_login x;
 
+    private void do_login(){
+        x = new ent_login();
+        x.setUsername(username.getText());
+        x.setPassword(password.getText());
+        boolean login = loginDAO.cek_login(x);
+
+        if (login) {
+            dispose();
+            view_menu x = new view_menu();
+            x.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Username / Password Tidak Cocok!");
+        }
+    }
+    
     public view_login() {
         initComponents();
         setLocationRelativeTo(null);
         username.requestFocus();
         loginDAO = factory.getLoginDA0();
+
+        Action action = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                do_login();
+            }
+        };
+
+        password.addActionListener(action);
     }
 
     /**
@@ -95,18 +122,7 @@ public class view_login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_loginMouseEntered
 
     private void btn_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loginMouseClicked
-        x = new ent_login();
-        x.setUsername(username.getText());
-        x.setPassword(password.getText());
-        boolean login = loginDAO.cek_login(x);
-
-        if (login) {
-            this.dispose();
-            view_menu x = new view_menu();
-            x.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Username / Password Tidak Cocok!");
-        }
+        do_login();
     }//GEN-LAST:event_btn_loginMouseClicked
 
     /**
