@@ -9,6 +9,8 @@ import java.awt.Color;
 import entity.ent_peminjaman;
 import factory.factory;
 import interfaces.int_peminjaman;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +53,13 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         tabel.getColumnModel().getColumn(1).setPreferredWidth(120);
         tabel.getColumnModel().getColumn(2).setPreferredWidth(80);
 
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                view_peminjaman x = new view_peminjaman();
+                x.setVisible(true);
+                dispose();
+            }
+        });
     }
 
     /**
@@ -65,7 +74,10 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         btn_add_buku = new javax.swing.JLabel();
         btn_save = new javax.swing.JLabel();
         btn_people = new javax.swing.JLabel();
+        help_anggota = new javax.swing.JLabel();
+        help_buku = new javax.swing.JLabel();
         btn_hapus = new javax.swing.JLabel();
+        back = new javax.swing.JLabel();
         tbl_anggota = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
         nama = new javax.swing.JTextField();
@@ -122,6 +134,34 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         });
         getContentPane().add(btn_people, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
+        help_anggota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help_buku.png"))); // NOI18N
+        help_anggota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                help_anggotaMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                help_anggotaMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                help_anggotaMouseEntered(evt);
+            }
+        });
+        getContentPane().add(help_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 230, -1));
+
+        help_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help_peminjam.png"))); // NOI18N
+        help_buku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                help_bukuMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                help_bukuMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                help_bukuMouseEntered(evt);
+            }
+        });
+        getContentPane().add(help_buku, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 230, -1));
+
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
         btn_hapus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,6 +175,13 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
+
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 60, 80));
 
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
@@ -213,7 +260,7 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Maksimal Pinjam 3");
         }
         jml_buku = tabel.getRowCount();
-        if(jml_buku > 0){
+        if (jml_buku > 0) {
             btn_hapus.setVisible(true);
         }
         System.out.print(jml_buku);
@@ -270,6 +317,8 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         nama.setText(xnama);
         alamat.setText(xalamat);
         telpon.setText(xtelpon);
+        help_anggota.setVisible(false);
+        help_buku.setVisible(false);
     }//GEN-LAST:event_btn_peopleMouseClicked
 
     private void btn_peopleMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_peopleMouseExited
@@ -283,10 +332,15 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
         DefaultTableModel model = (DefaultTableModel) tabel.getModel();
         int row = tabel.getSelectedRow();
-        model.removeRow(row);
-        jml_buku = jml_buku - 1;
-        if(jml_buku < 1){
-            btn_hapus.setVisible(false);
+
+        if (row != -1) {
+            model.removeRow(row);
+            jml_buku = jml_buku - 1;
+            if (jml_buku < 1) {
+                btn_hapus.setVisible(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Silakan pilih mana yang mau dihapus");
         }
     }//GEN-LAST:event_btn_hapusMouseClicked
 
@@ -297,6 +351,34 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
     private void btn_hapusMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseEntered
         btn_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete_hover.png")));
     }//GEN-LAST:event_btn_hapusMouseEntered
+
+    private void help_bukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_bukuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_bukuMouseClicked
+
+    private void help_bukuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_bukuMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_bukuMouseExited
+
+    private void help_bukuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_bukuMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_bukuMouseEntered
+
+    private void help_anggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_anggotaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_anggotaMouseClicked
+
+    private void help_anggotaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_anggotaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_anggotaMouseExited
+
+    private void help_anggotaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_anggotaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_help_anggotaMouseEntered
+
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+
+    }//GEN-LAST:event_backMouseClicked
 
     /**
      * @param args the command line arguments
@@ -366,11 +448,14 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alamat;
+    private javax.swing.JLabel back;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel btn_add_buku;
     private javax.swing.JLabel btn_hapus;
     private javax.swing.JLabel btn_people;
     private javax.swing.JLabel btn_save;
+    private javax.swing.JLabel help_anggota;
+    private javax.swing.JLabel help_buku;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nama;
     private javax.swing.JTable tabel;
