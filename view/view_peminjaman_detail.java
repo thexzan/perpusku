@@ -125,6 +125,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         tabel = new javax.swing.JTable();
         tanggal = new javax.swing.JTextField();
         btn_kembali = new javax.swing.JLabel();
+        btn_delete = new javax.swing.JLabel();
         nama = new javax.swing.JTextField();
         kembali = new javax.swing.JTextField();
         denda = new javax.swing.JTextField();
@@ -139,7 +140,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(640, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_back.png"))); // NOI18N
         btn_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_closeMouseClicked(evt);
@@ -186,7 +187,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         tanggal.setSelectionColor(new java.awt.Color(0, 122, 255));
         getContentPane().add(tanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 505, 220, 30));
 
-        btn_kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png"))); // NOI18N
+        btn_kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_kembali.png"))); // NOI18N
         btn_kembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_kembaliMouseClicked(evt);
@@ -198,7 +199,21 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
                 btn_kembaliMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
+        getContentPane().add(btn_kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 346, 60, -1));
+
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png"))); // NOI18N
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseEntered(evt);
+            }
+        });
+        getContentPane().add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 266, 60, -1));
 
         nama.setBackground(new Color(0,0,0,0));
         nama.setFont(new java.awt.Font("Osaka", 0, 20)); // NOI18N
@@ -256,11 +271,11 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseExited
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel.png")));
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_back.png")));
     }//GEN-LAST:event_btn_closeMouseExited
 
     private void btn_closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseEntered
-        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_cancel_hover.png")));
+        btn_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_back_hover.png")));
     }//GEN-LAST:event_btn_closeMouseEntered
 
     private void btn_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_closeMouseClicked
@@ -285,12 +300,24 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_kembaliMouseClicked
 
     private void btn_kembaliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseExited
-        // TODO add your handling code here:
+        btn_kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_kembali.png")));
     }//GEN-LAST:event_btn_kembaliMouseExited
 
     private void btn_kembaliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseEntered
-        // TODO add your handling code here:
+        btn_kembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_kembali_hover.png")));
     }//GEN-LAST:event_btn_kembaliMouseEntered
+
+    private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_deleteMouseClicked
+
+    private void btn_deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseExited
+         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete.png")));
+    }//GEN-LAST:event_btn_deleteMouseExited
+
+    private void btn_deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseEntered
+       btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_delete_hover.png")));
+    }//GEN-LAST:event_btn_deleteMouseEntered
 
     /**
      * @param args the command line arguments
@@ -346,6 +373,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     private javax.swing.JTextArea alamat;
     private javax.swing.JLabel bg;
     private javax.swing.JLabel btn_close;
+    private javax.swing.JLabel btn_delete;
     private javax.swing.JLabel btn_kembali;
     private javax.swing.JTextField denda;
     private javax.swing.JScrollPane jScrollPane1;

@@ -80,7 +80,7 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(640, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_detail.png"))); // NOI18N
+        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png"))); // NOI18N
         btn_add_buku.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_add_bukuMouseClicked(evt);
@@ -92,7 +92,7 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
                 btn_add_bukuMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_add_buku, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 456, 60, -1));
+        getContentPane().add(btn_add_buku, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 456, 60, -1));
 
         btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,11 +217,11 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_add_bukuMouseClicked
 
     private void btn_add_bukuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_add_bukuMouseExited
-        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_detail.png")));
+        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah.png")));
     }//GEN-LAST:event_btn_add_bukuMouseExited
 
     private void btn_add_bukuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_add_bukuMouseEntered
-        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_detail_hover.png")));
+        btn_add_buku.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_tambah_hover.png")));
     }//GEN-LAST:event_btn_add_bukuMouseEntered
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked

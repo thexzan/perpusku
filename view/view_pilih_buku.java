@@ -96,7 +96,7 @@ public class view_pilih_buku extends javax.swing.JDialog{
         setSize(new java.awt.Dimension(640, 510));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih.png"))); // NOI18N
         btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_saveMouseClicked(evt);
@@ -155,11 +155,11 @@ public class view_pilih_buku extends javax.swing.JDialog{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseExited
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png")));
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih.png")));
     }//GEN-LAST:event_btn_saveMouseExited
 
     private void btn_saveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseEntered
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save_hover.png")));
+        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih_hover.png")));
     }//GEN-LAST:event_btn_saveMouseEntered
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased

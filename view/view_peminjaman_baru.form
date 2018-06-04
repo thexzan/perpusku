@@ -35,7 +35,7 @@
     <Component class="javax.swing.JLabel" name="btn_add_buku">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/btn_detail.png"/>
+          <Image iconType="3" name="/images/btn_tambah.png"/>
         </Property>
       </Properties>
       <Events>
@@ -45,7 +45,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="323" y="456" width="60" height="-1"/>
+          <AbsoluteConstraints x="319" y="456" width="60" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

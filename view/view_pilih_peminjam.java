@@ -90,7 +90,7 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_save = new javax.swing.JLabel();
+        btn_pilih = new javax.swing.JLabel();
         tbl_anggota = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
         cari = new javax.swing.JTextField();
@@ -102,19 +102,19 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
         setSize(new java.awt.Dimension(640, 510));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png"))); // NOI18N
-        btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_pilih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih.png"))); // NOI18N
+        btn_pilih.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_saveMouseClicked(evt);
+                btn_pilihMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_saveMouseExited(evt);
+                btn_pilihMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_saveMouseEntered(evt);
+                btn_pilihMouseEntered(evt);
             }
         });
-        getContentPane().add(btn_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
+        getContentPane().add(btn_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 186, 60, -1));
 
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
@@ -160,25 +160,25 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseExited
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save.png")));
-    }//GEN-LAST:event_btn_saveMouseExited
+    private void btn_pilihMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pilihMouseExited
+        btn_pilih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih.png")));
+    }//GEN-LAST:event_btn_pilihMouseExited
 
-    private void btn_saveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseEntered
-        btn_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_save_hover.png")));
-    }//GEN-LAST:event_btn_saveMouseEntered
+    private void btn_pilihMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pilihMouseEntered
+        btn_pilih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_pilih_hover.png")));
+    }//GEN-LAST:event_btn_pilihMouseEntered
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
         refresh_table();
     }//GEN-LAST:event_cariKeyReleased
 
-    private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+    private void btn_pilihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pilihMouseClicked
         pinjam.id_anggota = id_anggota;
         pinjam.xnama = nama;
         pinjam.xalamat = alamat;
         pinjam.xtelpon = telpon;
         this.dispose();
-    }//GEN-LAST:event_btn_saveMouseClicked
+    }//GEN-LAST:event_btn_pilihMouseClicked
 
     /**
      * @param args the command line arguments
@@ -231,7 +231,7 @@ public class view_pilih_peminjam extends javax.swing.JDialog{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
-    private javax.swing.JLabel btn_save;
+    private javax.swing.JLabel btn_pilih;
     private javax.swing.JTextField cari;
     private javax.swing.JTable tabel;
     private javax.swing.JScrollPane tbl_anggota;
