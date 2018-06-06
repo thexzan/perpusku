@@ -121,6 +121,30 @@ public class imp_peminjaman implements int_peminjaman {
         return status;
     }
 
+    @Override
+    public boolean peminjam_aktif(int id_peminjam) {
+        boolean aktif = false;
+       try {
+            ps = db.connect().prepareStatement("select count(id) as hasil from peminjaman where id_anggota = ? and status = 'aktif'");
+            ps.setInt(1, id_peminjam);
+
+            status = db.execute(ps, true);
+            if (status) {
+                data = db.get_hasil();
+                while (data.next()) {
+                    if (data.getInt("hasil") > 0) {
+                        aktif = true;
+                    }
+                }
+                data.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("QUERY CEK PEMINJAM AKTIF SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return aktif;
+    }
+
     
 
 }

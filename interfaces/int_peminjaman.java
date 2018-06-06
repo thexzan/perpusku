@@ -16,4 +16,5 @@ public interface int_peminjaman {
     int get_insert_id();
     boolean insert(ent_peminjaman x);
     boolean insertDetail(ent_peminjaman x);
+    boolean peminjam_aktif(int id_peminjam);
 }

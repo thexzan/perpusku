@@ -9,7 +9,9 @@ import java.awt.Color;
 import entity.ent_anggota;
 import factory.factory;
 import interfaces.int_anggota;
+import interfaces.int_peminjaman;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +28,7 @@ public class view_pilih_peminjam extends javax.swing.JDialog {
     private DefaultTableModel model;
     private final String[] tabelHeader;
     private final int_anggota anggotaDAO;
+    private final int_peminjaman peminjamanDAO;
     private List<ent_anggota> listAnggota;
     public view_peminjaman_baru pinjam = null;
 
@@ -60,6 +63,7 @@ public class view_pilih_peminjam extends javax.swing.JDialog {
         setLocationRelativeTo(null);
 
         anggotaDAO = factory.getAnggotaDA0();
+        peminjamanDAO = factory.getPeminjamanDA0();
         tabelHeader = new String[]{"id", "Nama", "Telpon", "Alamat"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
@@ -173,11 +177,15 @@ public class view_pilih_peminjam extends javax.swing.JDialog {
     }//GEN-LAST:event_cariKeyReleased
 
     private void btn_pilihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pilihMouseClicked
-        pinjam.id_anggota = id_anggota;
-        pinjam.xnama = nama;
-        pinjam.xalamat = alamat;
-        pinjam.xtelpon = telpon;
-        this.dispose();
+        if (peminjamanDAO.peminjam_aktif(id_anggota)) {
+            JOptionPane.showMessageDialog(null, "Anggota masih memiliki peminjaman aktif!");
+        }else{
+            pinjam.id_anggota = id_anggota;
+            pinjam.xnama = nama;
+            pinjam.xalamat = alamat;
+            pinjam.xtelpon = telpon;
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_pilihMouseClicked
 
     /**
