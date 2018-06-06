@@ -97,7 +97,7 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
     @Override
     public List get_data_peminjaman(int cari) {
         try {
-            ps = db.connect().prepareStatement("select tanggal,tanggal_kembali,if(tanggal_kembali != \"0000-00-00 00:00:00\" AND datediff(now(),tanggal)> 7,(datediff(now(),tanggal)*500),denda) as denda,status from detail_peminjaman d join peminjaman p on p.id = d.id_peminjaman where id_peminjaman = ? group by id_peminjaman");
+            ps = db.connect().prepareStatement("call data_peminjaman(?)");
             ps.setInt(1, cari);
             listPeminjaman = new ArrayList<>();
 
