@@ -85,7 +85,7 @@ public class imp_buku implements int_buku {
     }
 
     @Override
-    public List get(String cari) {
+    public List get_all(String cari) {
         try {
             ps = db.connect().prepareStatement("SELECT * FROM buku WHERE judul like ? or kategori like ? or penerbit like ? order by id");
             ps.setString(1, "%" + cari + "%");
@@ -110,7 +110,39 @@ public class imp_buku implements int_buku {
                 return listBuku;
             }
         } catch (SQLException e) {
-            System.out.println("QUERY SELECT SALAH = " + e.getMessage());
+            System.out.println("QUERY SELECT ALL BUKU SALAH = " + e.getMessage());
+            System.exit(0);
+        }
+        return null;
+    }
+    
+    @Override
+    public List get_available(String cari) {
+        try {
+            ps = db.connect().prepareStatement("SELECT * FROM buku b where (judul like ? or kategori like ? or penerbit like ?) and b.stok > (select count(p.id) from peminjaman p join detail_peminjaman d on d.id_peminjaman = p.id where status = 'aktif' and id_buku = b.id)");
+            ps.setString(1, "%" + cari + "%");
+            ps.setString(2, "%" + cari + "%");
+            ps.setString(3, "%" + cari + "%");
+
+            status = db.execute(ps, true);
+            if (status) {
+                data_buku = db.get_hasil();
+                listBuku = new ArrayList<>();
+
+                while (data_buku.next()) {
+                    ent_buku b = new ent_buku();
+                    b.setId(data_buku.getInt(1));
+                    b.setJudul(data_buku.getString(2));
+                    b.setKategori(data_buku.getString(3));
+                    b.setPenerbit(data_buku.getString(4));
+                    b.setStok(data_buku.getInt(5));
+                    listBuku.add(b);
+                }
+                data_buku.close();
+                return listBuku;
+            }
+        } catch (SQLException e) {
+            System.out.println("QUERY SELECT BUKU AVAILABLE SALAH = " + e.getMessage());
             System.exit(0);
         }
         return null;

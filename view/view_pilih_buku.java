@@ -33,7 +33,7 @@ public class view_pilih_buku extends javax.swing.JDialog {
     public int id_buku;
 
     private void refresh_table() {
-        listBuku = bukuDAO.get(cari.getText());
+        listBuku = bukuDAO.get_available(cari.getText());
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
 

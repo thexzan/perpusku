@@ -15,5 +15,6 @@ public interface int_buku {
     boolean insert(ent_buku b);
     boolean update(ent_buku b);
     boolean delete(String judul);
-    List get(String cari);
+    List get_all(String cari);
+    List get_available(String cari);
 }

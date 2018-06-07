@@ -61,7 +61,7 @@ public class view_buku extends javax.swing.JFrame {
     }
 
     private void refresh_table() {
-        listBuku = bukuDAO.get(cari.getText());
+        listBuku = bukuDAO.get_all(cari.getText());
         model = (DefaultTableModel) tbl_buku.getModel();
         model.setRowCount(0);
 
