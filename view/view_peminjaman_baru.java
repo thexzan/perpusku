@@ -252,10 +252,21 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             view_pilih_buku x = new view_pilih_buku(null, true);
             x.pinjam = this;
             x.setVisible(true);
-
-            model.addRow(new Object[]{
-                id_buku, judul, kategori
-            });
+            
+            boolean sudah_ada = false;
+            for (int i = 0; i < jml_buku; i++) {
+                if(model.getValueAt(i, 1).toString().equals(judul)){
+                    sudah_ada = true;
+                }
+            }
+            
+            if (!sudah_ada) {
+                model.addRow(new Object[]{
+                    id_buku, judul, kategori
+                });
+            }else{
+                JOptionPane.showMessageDialog(null, "Maaf,anda memilih buku yang sama");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Maksimal Pinjam 3");
         }
