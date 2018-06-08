@@ -55,9 +55,11 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                view_peminjaman x = new view_peminjaman();
-                x.setVisible(true);
-                dispose();
+                if (JOptionPane.showConfirmDialog(null, "Yakin ingin menutup?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    view_peminjaman x = new view_peminjaman();
+                    x.setVisible(true);
+                    dispose();
+                }
             }
         });
     }
@@ -86,7 +88,7 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
         alamat = new javax.swing.JTextArea();
         bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 450));
         setResizable(false);
         setSize(new java.awt.Dimension(640, 450));
@@ -252,19 +254,19 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
             view_pilih_buku x = new view_pilih_buku(null, true);
             x.pinjam = this;
             x.setVisible(true);
-            
+
             boolean sudah_ada = false;
             for (int i = 0; i < jml_buku; i++) {
-                if(model.getValueAt(i, 1).toString().equals(judul)){
+                if (model.getValueAt(i, 1).toString().equals(judul)) {
                     sudah_ada = true;
                 }
             }
-            
+
             if (!sudah_ada) {
                 model.addRow(new Object[]{
                     id_buku, judul, kategori
                 });
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Maaf,anda memilih buku yang sama");
             }
         } else {
