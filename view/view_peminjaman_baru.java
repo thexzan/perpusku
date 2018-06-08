@@ -289,7 +289,8 @@ public class view_peminjaman_baru extends javax.swing.JFrame {
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
         int row = tabel.getRowCount();
-        if (row > 0 && !nama.equals("")) {
+
+        if (row > 0 && !nama.getText().equals("")) {
             a = new ent_peminjaman();
             a.setId_anggota(id_anggota);
 
