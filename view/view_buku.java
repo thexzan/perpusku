@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -84,8 +83,7 @@ public class view_buku extends javax.swing.JFrame {
 
     public view_buku() {
         initComponents();
-
-       
+ 
         setLocationRelativeTo(null);
         enable_text(false);
         judul.setEnabled(false);
@@ -105,6 +103,7 @@ public class view_buku extends javax.swing.JFrame {
                 stok.setText(model.getValueAt(baris, 3).toString());
             }
         });
+        
         tbl_buku.getColumnModel().getColumn(0).setPreferredWidth(150);
         tbl_buku.getColumnModel().getColumn(1).setPreferredWidth(150);
         tbl_buku.getColumnModel().getColumn(2).setPreferredWidth(140);
@@ -403,7 +402,7 @@ public class view_buku extends javax.swing.JFrame {
                 } else {
                     status = bukuDAO.update(b);
                 }
-                if (status == false) {
+                if (!status) {
                     JOptionPane.showMessageDialog(null, "Data gagal disimpan","Informasi", JOptionPane.INFORMATION_MESSAGE);
                 }
                 refresh_table();
@@ -419,14 +418,13 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
         cari.setText("");
         refresh_table();
-       
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
         if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             status = bukuDAO.delete(judul.getText());
 
-            if (status == false) {
+            if (!status) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             }
         }
