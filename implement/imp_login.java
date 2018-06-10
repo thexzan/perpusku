@@ -28,7 +28,7 @@ public class imp_login implements int_login {
     public boolean cek_login(ent_login e) {
         boolean status = false;
         try {
-            PreparedStatement ps = db.connect().prepareStatement("select * from admin where username = ? and password = ?");
+            PreparedStatement ps = db.connect().prepareStatement("select * from admin where username = ? and password = md5(?)");
             ps.setString(1, e.getUsername());
             ps.setString(2, e.getPassword());
 
