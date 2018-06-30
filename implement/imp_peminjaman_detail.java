@@ -128,7 +128,7 @@ public class imp_peminjaman_detail implements int_peminjaman_detail {
     public boolean kembali(int b) {
         status = false;
         try {
-            ps = db.connect().prepareStatement("UPDATE peminjaman SET status = 'selesai', tanggal_kembali = now(), denda = if(tanggal_kembali != \"0000-00-00 00:00:00\" AND status != \"aktif\" AND datediff(tanggal_kembali,tanggal)> 7,(datediff(tanggal_kembali,tanggal)*500),denda) WHERE id = ?");
+            ps = db.connect().prepareStatement("UPDATE peminjaman SET status = 'selesai', tanggal_kembali = now(), denda = if(tanggal_kembali != \"0000-00-00 00:00:00\" AND status != \"aktif\" AND datediff(tanggal_kembali,tanggal)> 7,((datediff(tanggal_kembali,tanggal)-7)*500),denda) WHERE id = ?");
             ps.setInt(1, b);
 
             status = db.execute(ps, false);
