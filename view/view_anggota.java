@@ -31,10 +31,14 @@ public class view_anggota extends javax.swing.JFrame {
     private List<ent_anggota> listAnggota;
     private ent_anggota a;
 
+    // METHOD UNTUK MENDETEKSI ANGKA
+    // DIGUNAKAN UNTUK VALIDASI NOMOR TELPON
     public static boolean isNumeric(String str) {
+        // CARA KERJA MENGGUNAKAN REGEX / REGULAR EXPRESSION
         return str.matches("-?\\d+(\\.\\d+)?");
     }
 
+    // METHOD UNTUK ENABLE DISABLE EDITING PADA TEKS FIELD
     private void enable_text(boolean status) {
         nama.setEnabled(status);
         tabel.setEnabled(!status);
@@ -45,6 +49,7 @@ public class view_anggota extends javax.swing.JFrame {
         cari.setEditable(!status);
     }
 
+    // METHOD UNTUK MENGUBAH TOMBOL YANG TAMPIL
     private void default_button(boolean status) {
         btn_tambah.setVisible(status);
         btn_edit.setVisible(status);
@@ -54,7 +59,8 @@ public class view_anggota extends javax.swing.JFrame {
         btn_save.setVisible(!status);
         btn_cancel.setVisible(!status);
     }
-
+    
+    // METHOD UNTUK MENGOSONGKAN TEKS FIELD
     private void clear_text() {
         nama.setText("");
         alamat.setText("");
@@ -62,11 +68,13 @@ public class view_anggota extends javax.swing.JFrame {
         cari.setText("");
     }
 
+    // METHOD UNTUK MENGAMBIL DATA DARI DATABASE
     private void refresh_table() {
         listAnggota = anggotaDAO.get(cari.getText());
         model = (DefaultTableModel) tabel.getModel();
         model.setRowCount(0);
-
+        
+        // PERULANGAN UNTUK MENGISI TABEL
         for (ent_anggota data : listAnggota) {
             model.addRow(new Object[]{
                 data.getId(),
@@ -75,7 +83,9 @@ public class view_anggota extends javax.swing.JFrame {
                 data.getAlamat()
             });
         }
-
+        
+        // KALAU TABEL ADA ISINYA ,
+        // MAKA PILIH BARIS PALING BAWAH
         if (tabel.getRowCount() > 0) {
             baris = tabel.getRowCount() - 1;
             tabel.setRowSelectionInterval(baris, baris);
@@ -93,9 +103,14 @@ public class view_anggota extends javax.swing.JFrame {
         btn_save.setVisible(false);
 
         anggotaDAO = factory.getAnggotaDA0();
+        
+        // SET JUDUL MASING-MASING KOLOM PADA TABLE
         tabelHeader = new String[]{"id", "Nama", "Telpon", "Alamat"};
         model = new DefaultTableModel(null, tabelHeader);
         tabel.setModel(model);
+        
+        // MEMASANG LISTENER AGAR PROGRAM MENGETAHUI
+        // BARIS MANA YANG SEDANG DIPILIH OLEH USER
         tabel.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tabel.getSelectedRow();
             if (baris >= 0) {
@@ -105,6 +120,8 @@ public class view_anggota extends javax.swing.JFrame {
                 alamat.setText(model.getValueAt(baris, 3).toString());
             }
         });
+        
+        // MENGATUR LEBAR MASING-MASING KOLOM PADA TABEL
         tabel.getColumnModel().getColumn(0).setPreferredWidth(30);
         tabel.getColumnModel().getColumn(1).setPreferredWidth(150);
         tabel.getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -388,26 +405,34 @@ public class view_anggota extends javax.swing.JFrame {
     }//GEN-LAST:event_cariKeyReleased
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+        // MEMASUKAN DATA KE ENTITAS-NYA
         a = new ent_anggota();
         a.setId(id_anggota);
         a.setNama(nama.getText());
         a.setTelpon(telpon.getText());
         a.setAlamat(alamat.getText());
 
+        // CEK APAKAH NOMOR TELPON HANYA DI ISI ANGKA
         if (!isNumeric(a.getTelpon())) {
+            // KALAU DI ISI SELAIN ANGKA MAKA MASUK SINI
+            // TAMPILKAN PESAN UNTUK MENGISI DENGAN ANGKA
             JOptionPane.showMessageDialog(null, "Silakan isi No Telpon dengan ANGKA");
             telpon.setText("");
             telpon.requestFocus();
         } else {
+            // KALAU SUDAH DI ISI DENGAN ANGKA LANJUT KESINI
+            // LALU CEK APAKAH SEMUA FIELD SUDAH DI ISI
             if (a.getNama().equals("") || a.getTelpon().equals("") || a.getAlamat().equals("")) {
+                // JIKA BELUM MAKA SURUH DI ISI
                 JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
             } else {
+                // KALAU SUDAH MAKA SEKARANG KITA MASUKAN DATA KE DATABASE
                 if (action.equalsIgnoreCase("INSERT")) {
                     status = anggotaDAO.insert(a);
                 } else {
                     status = anggotaDAO.update(a);
                 }
-                if (status == false) {
+                if (!status) {
                     JOptionPane.showMessageDialog(null, "Data gagal disimpan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                 }
                 refresh_table();
@@ -427,7 +452,7 @@ public class view_anggota extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             status = anggotaDAO.delete(id_anggota);
 
-            if (status == false) {
+            if (!status) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             }
         }
