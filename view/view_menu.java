@@ -47,6 +47,7 @@ public class view_menu extends javax.swing.JFrame {
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn_logout.png"))); // NOI18N
