@@ -16,6 +16,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -73,6 +74,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
     }
 
     public view_peminjaman_detail(int a) {
+        // a INI KIRIMAN DARI FORM SEBELUMNYA
         this.id_peminjaman = a;
         initComponents();
         nama.setEnabled(false);
@@ -92,21 +94,45 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
         telpon.setText(Anggota.get(0).getTelpon());
         alamat.setText(Anggota.get(0).getAlamat());
 
-        String tanggalx = Peminjaman.get(0).getTanggal();
-        LocalDateTime tanggalx_new = LocalDateTime.parse(tanggalx, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
-        String tanggal_new = tanggalx_new.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
-        LocalDateTime hari_ini = LocalDateTime.now();
-        String tanggal_newx = hari_ini.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
+        // MENGUBAH FORMAT TANGGAL BIAR MUDAH DIBACA
+        String tanggal_pinjam = Peminjaman.get(0).getTanggal();
+        LocalDateTime tanggal_pinjam_parsed = LocalDateTime.parse(tanggal_pinjam, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+        String tanggal_pinjam_terformat = tanggal_pinjam_parsed.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
 
-        tanggal.setText(tanggal_new);
-        kembali.setText(tanggal_newx);
+        String tanggal_kembali = Peminjaman.get(0).getTanggal_kembali();
+        String tanggal_kembali_terformat = "";
+        String denda_total = String.valueOf(Peminjaman.get(0).getDenda());
+
+        // CEK TANGGAL KEMBALI ISINYA ADA GAK
+        // KALAU GAK ADA BERARTI BELUM KEMBALI
+        if (tanggal_kembali == null) {
+            // DAPATKAN TANGGAL HARI INI
+            LocalDateTime hari_ini = LocalDateTime.now();
+            // HITUNG PERBEDAAN TANGGAL PINJAM DAN TANGGAL HARI INI DENGAN CHRONOUNIT
+            int total_jumlah_hari = (int) ChronoUnit.DAYS.between(tanggal_pinjam_parsed, hari_ini);
+
+            // KALAU TOTAL PEMINJAMAN UDAH LEBIH DARI 7 HARI MAKA STATUSNYA TERLAMBAT
+            if (total_jumlah_hari > 7) {
+                int terlambat = total_jumlah_hari - 6;
+                tanggal_kembali_terformat = "Terlambat " + terlambat + " hari";
+            } else {
+                tanggal_kembali_terformat = "AKTIF";
+            }
+        } else {
+            // KALAU SUDAH KEMBALI MAKA TINGGAL PARSE TANGGAL KEMBALI DARI DATABASE
+            LocalDateTime tanggal_kembali_parsed = LocalDateTime.parse(tanggal_kembali, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
+            tanggal_kembali_terformat = tanggal_kembali_parsed.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yy"));
+        }
+
+        tanggal.setText(tanggal_pinjam_terformat);
+        kembali.setText(tanggal_kembali_terformat);
         denda.setText("Rp. " + String.valueOf(Peminjaman.get(0).getDenda()));
 
         if (Peminjaman.get(0).getStatus().equals("selesai")) {
             btn_kembali.setVisible(false);
             btn_delete.setVisible(false);
         }
-        
+
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 view_peminjaman x = new view_peminjaman();
@@ -302,7 +328,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
                 x.setVisible(true);
                 dispose();
             }
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_btn_kembaliMouseClicked
 
     private void btn_kembaliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kembaliMouseExited
@@ -319,7 +345,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
 
             if (status == false) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-            }else{
+            } else {
                 view_peminjaman x = new view_peminjaman();
                 x.setVisible(true);
                 dispose();
