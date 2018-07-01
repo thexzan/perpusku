@@ -117,8 +117,8 @@ public class view_buku extends javax.swing.JFrame {
         });
         
         // MENGATUR LEBAR MASING-MASING KOLOM PADA TABEL
-        tbl_buku.getColumnModel().getColumn(0).setPreferredWidth(150);
-        tbl_buku.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbl_buku.getColumnModel().getColumn(0).setPreferredWidth(180);
+        tbl_buku.getColumnModel().getColumn(1).setPreferredWidth(120);
         tbl_buku.getColumnModel().getColumn(2).setPreferredWidth(140);
         tbl_buku.getColumnModel().getColumn(3).setPreferredWidth(40);
 
