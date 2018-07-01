@@ -27,17 +27,28 @@ public class view_login extends javax.swing.JFrame {
     private final int_login loginDAO;
     private ent_login x;
 
+    // METHOD UNTUK MELAKUKAN LOGIN
+    // DIPISAH MENJADI METHOD SENDIRI KARENA AKAN DIPANGGIL PADA 2 TEMPAT
+    // YAITU SAAT FIELD PASSWORD DI ENTER DAN SAAT TOMBOL LOGIN DI KLIK
+    // AGAR TIDAK PERLU NGETIK 2 HAL YANG SAMA 2 KALI
+    // CUKUP MEMANGGIL FUNGSI INI SAJA
     private void do_login() {
+        // MEMASUKAN DATA KE ENTITAS
         x = new ent_login();
         x.setUsername(username.getText());
         x.setPassword(password.getText());
+        // MENJALANKAN METHOD CEK LOGIN
         boolean login = loginDAO.cek_login(x);
 
+        // JIKA RETURN / HASILNYA TRUES
         if (login) {
+            // MAKA LOGIN BERHASIL
+            // TUTUP WINDOW INI DAN BUKA MENU UTAMA
             dispose();
             view_menu x = new view_menu();
             x.setVisible(true);
         } else {
+            // JIKA RETURN FALSE MAKA TAMPILKAN PESAN
             JOptionPane.showMessageDialog(null, "Username / Password Tidak Cocok!");
         }
     }
@@ -48,13 +59,16 @@ public class view_login extends javax.swing.JFrame {
         username.requestFocus();
         loginDAO = factory.getLoginDA0();
 
+        // MEMBUAT ACTION UNTUK MELAKUKAN CEK LOGIN
         Action action = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 do_login();
             }
         };
-
+        
+        // MEMASANG ACTION YANG TADI DIBUAT KE PASSWORD FIELD
+        // AGAR DAPAT MELAKUKAN LOGIN KETIKA PASSWORD DI ENTER
         password.addActionListener(action);
         btn_login.setVisible(false);
     }

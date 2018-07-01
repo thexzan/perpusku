@@ -182,7 +182,8 @@ public class view_menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_sirkulasiMouseClicked
 
     private void btn_laporanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_laporanMouseClicked
-        // TODO add your handling code here:
+        view_report x = new view_report();
+        x.setVisible(true);
     }//GEN-LAST:event_btn_laporanMouseClicked
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
