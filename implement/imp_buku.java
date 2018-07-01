@@ -27,7 +27,9 @@ public class imp_buku implements int_buku {
     private List<ent_buku> listBuku;
     private PreparedStatement ps;
 
+    // METHOD CONSTRUCTOR
     public imp_buku() {
+        // MEMANGGIL CLASS DATABASE
         db = new db();
         db.connect();
     }
