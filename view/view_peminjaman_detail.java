@@ -113,7 +113,7 @@ public class view_peminjaman_detail extends javax.swing.JFrame {
 
             // KALAU TOTAL PEMINJAMAN UDAH LEBIH DARI 7 HARI MAKA STATUSNYA TERLAMBAT
             if (total_jumlah_hari > 7) {
-                int terlambat = total_jumlah_hari - 6;
+                int terlambat = total_jumlah_hari - 7;
                 tanggal_kembali_terformat = "Terlambat " + terlambat + " hari";
             } else {
                 tanggal_kembali_terformat = "AKTIF";
