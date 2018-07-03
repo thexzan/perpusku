@@ -16,9 +16,11 @@ public class db {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 try {
-                    String url = "jdbc:mysql://localhost:3306/perpusku";
+                    // ZERO DATE TIME BEHAVIOR = NULL 
+                    // BERGUNA UNTUK MENGATASI DATA TANGGAL DARI MYSQL YANG BERUBA - 0000-00-00 00:00:00
+                    // AKAN DIUBAH MENJADI NULL
+                    String url = "jdbc:mysql://localhost:3306/perpusku?zeroDateTimeBehavior=convertToNull";
                     conn = DriverManager.getConnection(url, "root", "root");
-                    System.out.println("KONEKSI SUKSES");
                 } catch (SQLException se) {
                     System.out.println("KONEKSI GAGAL = " + se.getMessage());
                     System.exit(0);
@@ -34,12 +36,19 @@ public class db {
     public ResultSet get_hasil() {
         return rs;
     }
-
+    
+    // METHODE EXECUTE MELEMPAR EXCEPTION
+    // SEHINGGA PEMANGGILNYA HARUS MENGGUNAKAN TRY-CATCH
+    // HAL INI BERGUNA AGAR ERROR DAPAT DIANALISA PADA MASING-MASING PEMANGGIL
     public boolean execute(PreparedStatement ps, boolean status) throws SQLException {
         if (status) {
-            rs = ps.executeQuery(); //select
+            // KARENA SELECT MENGHASILKAN RESULTSET
+            // MAKA TAMPUNG RESULTSET-NYA
+            rs = ps.executeQuery();
         } else {
-            ps.executeUpdate(); //insert, update, delete
+            // SELAIN ITU ( INSERT,UPDATE,DELETE )
+            // TIDAK ADA YANG PERLU DITAMPUNG
+            ps.executeUpdate();
         }
         return true;
     }

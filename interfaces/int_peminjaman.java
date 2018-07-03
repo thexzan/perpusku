@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 package interfaces;
-import entity.ent_buku;
+import entity.ent_peminjaman;
 import java.util.List;
 
 /**
  *
  * @author xzan
  */
-public interface int_buku {
-    boolean insert(ent_buku b);
-    boolean update(ent_buku b);
-    boolean delete(String judul);
-    List get_all(String cari);
-    List get_available(String cari);
+public interface int_peminjaman {
+    List get(String cari);
+    int get_insert_id();
+    boolean insert(ent_peminjaman x);
+    boolean insertDetail(ent_peminjaman x);
+    boolean peminjam_aktif(int id_peminjam);
 }
