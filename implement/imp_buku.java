@@ -7,6 +7,7 @@ package implement;
 
 import entity.ent_buku;
 import interfaces.int_buku;
+import java.sql.PreparedStatement;
 import koneksi.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,12 +21,15 @@ import java.util.List;
 public class imp_buku implements int_buku {
 
     private String query;
-    private db db;
+    private final db db;
     private boolean status;
     private ResultSet data_buku;
     private List<ent_buku> listBuku;
+    private PreparedStatement ps;
 
+    // METHOD CONSTRUCTOR
     public imp_buku() {
+        // MEMANGGIL CLASS DATABASE
         db = new db();
         db.connect();
     }
@@ -33,35 +37,75 @@ public class imp_buku implements int_buku {
     @Override
     public boolean insert(ent_buku b) {
         status = false;
-        query = "INSERT INTO buku VALUES (NULL,'"+b.getJudul()+"','"+b.getKategori()+"','"+b.getPenerbit()+"','"+b.getStok()+"')";
-        status = db.exe(query, false);
+        try {
+            ps = db.connect().prepareStatement("INSERT INTO buku VALUES (NULL,?,?,?,?)");
+            ps.setString(1, b.getJudul());
+            ps.setString(2, b.getKategori());
+            ps.setString(3, b.getPenerbit());
+            ps.setInt(4, b.getStok());
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY INSERT SALAH = " + e.getMessage());
+            System.exit(0);
+        }
         return status;
     }
 
     @Override
     public boolean update(ent_buku b) {
         status = false;
-        query = "UPDATE buku SET judul='"+b.getJudul()+"',kategori='"+b.getKategori()+"',penerbit='"+b.getPenerbit()+"',stok='"+b.getStok()+"' WHERE judul='"+b.getJudul()+"'";
-        status = db.exe(query, false);
+        try {
+            ps = db.connect().prepareStatement("UPDATE buku SET judul=?,kategori=?,penerbit=?,stok=? WHERE judul=?");
+            ps.setString(1, b.getJudul());
+            ps.setString(2, b.getKategori());
+            ps.setString(3, b.getPenerbit());
+            ps.setInt(4, b.getStok());
+            ps.setString(5, b.getJudul());
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY UPDATE SALAH = " + e.getMessage());
+            System.exit(0);
+        }
         return status;
     }
 
     @Override
     public boolean delete(String judul) {
         status = false;
-        query = "DELETE FROM buku WHERE judul ='"+judul+"'";
-        status = db.exe(query, false);
+        try {
+            ps = db.connect().prepareStatement("DELETE FROM buku WHERE judul = ?");
+            ps.setString(1, judul);
+
+            status = db.execute(ps, false);
+        } catch (SQLException e) {
+            System.out.println("QUERY DELETE SALAH = " + e.getMessage());
+            System.exit(0);
+        }
         return status;
     }
     
-    @Override
-    public List get(String cari) {
-        query = "SELECT * FROM buku WHERE judul like '%" + cari + "%' or kategori like '%" + cari + "%' or penerbit like '%" + cari + "%' order by id";
-        status = db.exe(query, true);
-        if (status) {
-            data_buku = db.get_hasil();
-            listBuku = new ArrayList<>();
-            try {
+    private List get(String type,String cari){
+        String query = null;
+        
+        if (type.equalsIgnoreCase("ALL")) {
+            query = "SELECT * FROM buku WHERE judul like ? or kategori like ? or penerbit like ? order by id";
+        }else if(type.equalsIgnoreCase("AVAILABLE")){
+            query = "SELECT * FROM buku b where (judul like ? or kategori like ? or penerbit like ?) and b.stok > (select count(p.id) from peminjaman p join detail_peminjaman d on d.id_peminjaman = p.id where status = 'aktif' and id_buku = b.id)";
+        }
+        
+        try {
+            ps = db.connect().prepareStatement(query);
+            ps.setString(1, "%" + cari + "%");
+            ps.setString(2, "%" + cari + "%");
+            ps.setString(3, "%" + cari + "%");
+
+            status = db.execute(ps, true);
+            if (status) {
+                data_buku = db.get_hasil();
+                listBuku = new ArrayList<>();
+
                 while (data_buku.next()) {
                     ent_buku b = new ent_buku();
                     b.setId(data_buku.getInt(1));
@@ -73,11 +117,22 @@ public class imp_buku implements int_buku {
                 }
                 data_buku.close();
                 return listBuku;
-            } catch (SQLException e) {
-                return null;
             }
+        } catch (SQLException e) {
+            System.out.println("QUERY SELECT BUKU SALAH = " + e.getMessage());
+            System.exit(0);
         }
         return null;
+    }
+
+    @Override
+    public List get_all(String cari) {
+        return this.get("ALL", cari);
+    }
+    
+    @Override
+    public List get_available(String cari) {
+        return this.get("AVAILABLE", cari);
     }
 
 }

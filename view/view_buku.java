@@ -30,6 +30,7 @@ public class view_buku extends javax.swing.JFrame {
     private List<ent_buku> listBuku;
     private ent_buku b;
 
+    // METHOD UNTUK ENABLE DISABLE EDITING PADA TEKS FIELD
     private void enable_text(boolean status) {
         stok.setEnabled(status);
         tbl_buku.setEnabled(!status);
@@ -41,6 +42,7 @@ public class view_buku extends javax.swing.JFrame {
         judul.setEnabled(false);
     }
 
+    // METHOD UNTUK MENGUBAH TOMBOL YANG TAMPIL
     private void default_button(boolean status) {
         btn_tambah.setVisible(status);
         btn_edit.setVisible(status);
@@ -51,6 +53,7 @@ public class view_buku extends javax.swing.JFrame {
         btn_cancel.setVisible(!status);
     }
 
+    // METHOD UNTUK MENGOSONGKAN TEKS FIELD
     private void clear_text() {
         judul.setText("");
         kategori.setText("");
@@ -59,11 +62,13 @@ public class view_buku extends javax.swing.JFrame {
         cari.setText("");
     }
 
+    // METHOD UNTUK MENGAMBIL DATA DARI DATABASE
     private void refresh_table() {
-        listBuku = bukuDAO.get(cari.getText());
+        listBuku = bukuDAO.get_all(cari.getText());
         model = (DefaultTableModel) tbl_buku.getModel();
         model.setRowCount(0);
 
+        // PERULANGAN UNTUK MENGISI TABEL
         for (ent_buku data : listBuku) {
             model.addRow(new Object[]{
                 data.getJudul(),
@@ -73,6 +78,8 @@ public class view_buku extends javax.swing.JFrame {
             });
         }
 
+        // KALAU TABEL ADA ISINYA ,
+        // MAKA PILIH BARIS PALING BAWAH
         if (tbl_buku.getRowCount() > 0) {
             baris = tbl_buku.getRowCount() - 1;
             tbl_buku.setRowSelectionInterval(baris, baris);
@@ -83,15 +90,22 @@ public class view_buku extends javax.swing.JFrame {
 
     public view_buku() {
         initComponents();
+ 
+        setLocationRelativeTo(null);
         enable_text(false);
         judul.setEnabled(false);
         btn_cancel.setVisible(false);
         btn_save.setVisible(false);
 
         bukuDAO = factory.getBukuDA0();
+        
+        // SET JUDUL MASING-MASING KOLOM PADA TABLE
         tabelHeader = new String[]{"Judul", "Kategori", "Penerbit", "Stok"};
         model = new DefaultTableModel(null, tabelHeader);
         tbl_buku.setModel(model);
+        
+        // MEMASANG LISTENER AGAR PROGRAM MENGETAHUI
+        // BARIS MANA YANG SEDANG DIPILIH OLEH USER
         tbl_buku.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             baris = tbl_buku.getSelectedRow();
             if (baris >= 0) {
@@ -101,6 +115,12 @@ public class view_buku extends javax.swing.JFrame {
                 stok.setText(model.getValueAt(baris, 3).toString());
             }
         });
+        
+        // MENGATUR LEBAR MASING-MASING KOLOM PADA TABEL
+        tbl_buku.getColumnModel().getColumn(0).setPreferredWidth(180);
+        tbl_buku.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tbl_buku.getColumnModel().getColumn(2).setPreferredWidth(140);
+        tbl_buku.getColumnModel().getColumn(3).setPreferredWidth(40);
 
         refresh_table();
     }
@@ -129,8 +149,9 @@ public class view_buku extends javax.swing.JFrame {
         cari = new javax.swing.JTextField();
         bg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 620));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kategori.setBackground(new Color(0,0,0,0));
@@ -242,6 +263,8 @@ public class view_buku extends javax.swing.JFrame {
         tbl_anggota.setBackground(new java.awt.Color(102, 255, 102));
         tbl_anggota.setBorder(null);
         tbl_anggota.setForeground(new java.awt.Color(204, 51, 255));
+        tbl_anggota.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tbl_anggota.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         tbl_buku.setForeground(new java.awt.Color(51, 51, 51));
         tbl_buku.setModel(new javax.swing.table.DefaultTableModel(
@@ -255,6 +278,7 @@ public class view_buku extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_buku.setPreferredSize(new java.awt.Dimension(480, 190));
         tbl_buku.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tbl_buku.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbl_anggota.setViewportView(tbl_buku);
@@ -348,6 +372,7 @@ public class view_buku extends javax.swing.JFrame {
         default_button(false);
         enable_text(true);
         clear_text();
+        // KARENA MAU MELAKUKAN TAMBAH BERARTI ACTION KITA ISI INSERT
         action = "INSERT";
 
         judul.setEnabled(true);
@@ -358,12 +383,15 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editMouseClicked
         default_button(false);
         enable_text(true);
+        // KARENA MAU MELAKUKAN EDIT BERARTI ACTION KITA ISI UPDATE
         action = "UPDATE";
         kategori.requestFocus();
     }//GEN-LAST:event_btn_editMouseClicked
 
     private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
+        // TAMPILKAN KONFIRMASI
         if (JOptionPane.showConfirmDialog(null, "Yakin ingin Cancel?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // JIKA SETUJU MAKA MASUK SINI
             default_button(true);
             enable_text(false);
             refresh_table();
@@ -371,27 +399,39 @@ public class view_buku extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelMouseClicked
 
     private void cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cariKeyReleased
+        // SAAT MENGETIK DI TEKS FIELD PENCARIAN
+        // MAKA SETIAP SATU HURUF YANG DIKETIK AKAN MELAKUKAN REFERSH TABLE
+        // SEHINGGA TIDAK PERLU TOMBOL CARI
         refresh_table();
     }//GEN-LAST:event_cariKeyReleased
 
     private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+        // MEMASUKAN DATA KE ENTITY BUKU
         b = new ent_buku();
         b.setJudul(judul.getText());
         b.setKategori(kategori.getText());
         b.setPenerbit(penerbit.getText());
 
+        // MENGGUNAKAN TRY CATCH
+        // KARENA STOK HARUS DI ISI DENGAN ANGKA
         try {
+            // JIKA STOK BENAR TERISI ANGKA MAKA MASUK SINI
+            
             b.setStok(Integer.parseInt(stok.getText()));
-
+            
+            // CEK APAKAH SEMUA SUDAH DIISI 
             if (b.getJudul().equals("") || b.getPenerbit().equals("") || b.getKategori().equals("")) {
+                // JIKA ADA YANG BELUM DIISI MAKA SURUH NGISI
                 JOptionPane.showMessageDialog(null, "Silakan isi semua kolom");
             } else {
+                // JIKA SUDAH DIISI SEMUA MASUK SINI
+                // CEK APAKAH ACTIONNYA INSERT ATAU UPDATE
                 if (action.equalsIgnoreCase("INSERT")) {
                     status = bukuDAO.insert(b);
                 } else {
                     status = bukuDAO.update(b);
                 }
-                if (status == false) {
+                if (!status) {
                     JOptionPane.showMessageDialog(null, "Data gagal disimpan","Informasi", JOptionPane.INFORMATION_MESSAGE);
                 }
                 refresh_table();
@@ -400,6 +440,7 @@ public class view_buku extends javax.swing.JFrame {
             }
 
         } catch (NumberFormatException e) {
+            // KALAU STOK DIISI SELAIN ANGKA MAKA MASUK SINI TAMPILKAN PESAN
             JOptionPane.showMessageDialog(null, "isi STOK dengan ANGKA");
         }
     }//GEN-LAST:event_btn_saveMouseClicked
@@ -407,14 +448,15 @@ public class view_buku extends javax.swing.JFrame {
     private void btn_refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_refreshMouseClicked
         cari.setText("");
         refresh_table();
-       
     }//GEN-LAST:event_btn_refreshMouseClicked
 
     private void btn_hapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_hapusMouseClicked
+        // KONFIRMASI DULU SEBELUM BENAR-BENAR MENGHAPUS DATA
         if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // JIKA SETUJU MAKA DATA AKAN DI HAPUS
             status = bukuDAO.delete(judul.getText());
 
-            if (status == false) {
+            if (!status) {
                 JOptionPane.showMessageDialog(null, "Gagal menghapus data!", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             }
         }

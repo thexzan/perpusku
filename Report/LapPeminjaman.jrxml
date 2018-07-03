@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f5c51b8-5d12-40f5-b3f1-caa179ce23f0">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     peminjaman.`id` AS peminjaman_id,
+     peminjaman.`id_anggota` AS peminjaman_id_anggota,
+     peminjaman.`tanggal` AS peminjaman_tanggal,
+     peminjaman.`status` AS peminjaman_status,
+     peminjaman.`tanggal_kembali` AS peminjaman_tanggal_kembali,
+     peminjaman.`denda` AS peminjaman_denda
+FROM
+     `peminjaman` peminjaman]]>
+	</queryString>
+	<field name="peminjaman_id" class="java.lang.Integer"/>
+	<field name="peminjaman_id_anggota" class="java.lang.Integer"/>
+	<field name="peminjaman_tanggal" class="java.sql.Timestamp"/>
+	<field name="peminjaman_status" class="java.lang.String"/>
+	<field name="peminjaman_tanggal_kembali" class="java.sql.Timestamp"/>
+	<field name="peminjaman_denda" class="java.lang.Integer"/>
+	<group name="peminjaman_id">
+		<groupExpression><![CDATA[$F{peminjaman_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="774" height="555" uuid="c3512628-a9cd-49d7-8e17-9b852838f518"/>
+                                <imageExpression><![CDATA["src/images/bg_laporan_2.jpeg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="9" y="323" width="108" height="20" uuid="788b0f2a-871e-470a-8b81-63a733505d8e"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="323" width="108" height="20" uuid="18fc4285-2e78-4bc3-8930-4ef0e597029b"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_id_anggota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="323" width="108" height="20" uuid="0d916fed-82da-4d60-9f2a-35be60041a15"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="323" width="108" height="20" uuid="f32454b1-00b1-4a2d-b585-511b809e6620"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="499" y="323" width="108" height="20" uuid="2c310626-3b16-497b-84fc-8cf13b05c649"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_tanggal_kembali}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="624" y="323" width="108" height="20" uuid="e2bb72fc-c3d4-40ea-894b-12f1e5094fdd"/>
+				<textFieldExpression><![CDATA[$F{peminjaman_denda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="262" width="108" height="20" uuid="57aee40e-f992-442d-b2f4-1d33f57f1882"/>
+				<text><![CDATA[peminjaman_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="262" width="108" height="20" uuid="82078e72-64fe-4b61-a7b1-eace20fb31a9"/>
+				<text><![CDATA[peminjaman_id_anggota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="262" width="108" height="20" uuid="f4f3a74b-f249-4374-877b-efb7ad40fc18"/>
+				<text><![CDATA[peminjaman_tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="262" width="108" height="20" uuid="0ad0cc90-abdf-4ff9-b46d-61ac0e9ed7dd"/>
+				<text><![CDATA[peminjaman_status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="262" width="108" height="20" uuid="d49b64bf-4c80-4d82-abcc-106a6e74fd76"/>
+				<text><![CDATA[peminjaman_tanggal_kembali]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="624" y="262" width="108" height="20" uuid="65d59b97-4aa8-4f63-a480-fc55cacc9ca8"/>
+				<text><![CDATA[peminjaman_denda]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
