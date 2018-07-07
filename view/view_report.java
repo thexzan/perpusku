@@ -113,8 +113,8 @@ public class view_report extends javax.swing.JFrame {
             koneksi.connect();
             try {
                 Map<String, Object> parameter = new HashMap<String, Object>();
-
-                File rpt = new File("src/Report/LapAnggota.jrxml");
+                
+                File rpt = new File("src/Report/LepAnggota.jrxml");
                 JasperDesign jasDesign = JRXmlLoader.load(rpt);
                 parameter.clear();
                 JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
@@ -136,7 +136,7 @@ public class view_report extends javax.swing.JFrame {
             try {
                 Map<String, Object> parameter = new HashMap<String, Object>();
 
-                File rpt = new File("src/Report/LapBuku.jrxml");
+                File rpt = new File("src/Report/LepBuku.jrxml");
                 JasperDesign jasDesign = JRXmlLoader.load(rpt);
                 parameter.clear();
                 JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
@@ -159,7 +159,7 @@ public class view_report extends javax.swing.JFrame {
             try {
                 Map<String, Object> parameter = new HashMap<String, Object>();
 
-                File rpt = new File("src/Report/LapPeminjaman.jrxml");
+                File rpt = new File("src/Report/LepPeminjaman.jrxml");
                 JasperDesign jasDesign = JRXmlLoader.load(rpt);
                 parameter.clear();
                 JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
