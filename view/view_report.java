@@ -113,7 +113,7 @@ public class view_report extends javax.swing.JFrame {
             koneksi.connect();
             try {
                 Map<String, Object> parameter = new HashMap<String, Object>();
-                
+
                 File rpt = new File("src/Report/LepAnggota.jrxml");
                 JasperDesign jasDesign = JRXmlLoader.load(rpt);
                 parameter.clear();

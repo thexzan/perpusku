@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b720e459-e489-43f7-b722-f361271f9717">
-	<property name="template.type" value="columnar"/>
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
-	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
-	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
-	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
-	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-			<style mode="Opaque" backcolor="#F0EFEF"/>
-		</conditionalStyle>
-	</style>
-	<queryString language="SQL">
+    <property name="template.type" value="columnar"/>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="Title" forecolor="#000000" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+    <style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+    <style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+    <style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+    <style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+            <style mode="Opaque" backcolor="#F0EFEF"/>
+        </conditionalStyle>
+    </style>
+    <queryString language="SQL">
 		<![CDATA[SELECT
      buku.`id` AS buku_id,
      buku.`judul` AS buku_judul,
@@ -23,158 +23,158 @@
      buku.`stok` AS buku_stok
 FROM
      `buku` buku]]>
-	</queryString>
-	<field name="buku_id" class="java.lang.Integer"/>
-	<field name="buku_judul" class="java.lang.String"/>
-	<field name="buku_kategori" class="java.lang.String"/>
-	<field name="buku_penerbit" class="java.lang.String"/>
-	<field name="buku_stok" class="java.lang.Integer"/>
-	<group name="buku_id">
-		<groupExpression><![CDATA[$F{buku_id}]]></groupExpression>
-		<groupHeader>
-			<band height="31">
-				<frame>
-					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#007AFF" uuid="9abd0d6f-e695-4ccf-99c6-fa5fb0f5bb7f"/>
-					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="1" width="479" height="23" forecolor="#FFFFFF" uuid="1a27ed24-471c-41b1-bf4f-f2a1b8f11fc7"/>
-						<textElement>
-							<font isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{buku_id}]]></textFieldExpression>
-					</textField>
-				</frame>
-			</band>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
-	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="132" splitType="Stretch">
-			<rectangle>
-				<reportElement x="0" y="0" width="555" height="132" forecolor="#B89F7D" backcolor="#007AFF" uuid="4d01abbe-bbfb-4e97-91e7-a9b981c78c79"/>
-			</rectangle>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="58" y="28" width="414" height="82" uuid="4ae389ce-21b8-42af-b963-5ec81458e689"/>
-				<imageExpression><![CDATA["src/images/Teks - Buku.png"]]></imageExpression>
-			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="91" splitType="Stretch">
-			<image>
-				<reportElement x="2" y="0" width="56" height="80" uuid="8ed4f287-e0d2-4c49-9701-b512e2fbc52a"/>
+    </queryString>
+    <field name="buku_id" class="java.lang.Integer"/>
+    <field name="buku_judul" class="java.lang.String"/>
+    <field name="buku_kategori" class="java.lang.String"/>
+    <field name="buku_penerbit" class="java.lang.String"/>
+    <field name="buku_stok" class="java.lang.Integer"/>
+    <group name="buku_id">
+        <groupExpression><![CDATA[$F{buku_id}]]></groupExpression>
+        <groupHeader>
+            <band height="31">
+                <frame>
+                    <reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#007AFF" uuid="9abd0d6f-e695-4ccf-99c6-fa5fb0f5bb7f"/>
+                    <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                        <reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="1" width="479" height="23" forecolor="#FFFFFF" uuid="1a27ed24-471c-41b1-bf4f-f2a1b8f11fc7"/>
+                        <textElement>
+                            <font isBold="false"/>
+                        </textElement>
+                        <textFieldExpression><![CDATA[$F{buku_id}]]></textFieldExpression>
+                    </textField>
+                </frame>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="6"/>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="132" splitType="Stretch">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="132" forecolor="#B89F7D" backcolor="#007AFF" uuid="4d01abbe-bbfb-4e97-91e7-a9b981c78c79"/>
+            </rectangle>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="58" y="28" width="414" height="82" uuid="4ae389ce-21b8-42af-b963-5ec81458e689"/>
+                <imageExpression><![CDATA["src/images/Teks - Buku.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="91" splitType="Stretch">
+            <image>
+                <reportElement x="2" y="0" width="56" height="80" uuid="8ed4f287-e0d2-4c49-9701-b512e2fbc52a"/>
 				
-			</image>
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="2" y="90" width="551" height="1" uuid="33830d65-7af5-4029-99b5-547512799fcc"/>
-			</line>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="79" y="0" width="132" height="20" forecolor="#000000" uuid="e8b997f4-a21a-46a7-ac98-805436c59a8a"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Judul Buku]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="215" y="0" width="338" height="18" uuid="0eb5e5fa-14b9-461e-b931-82db75c6fb3f"/>
-				<textElement textAlignment="Left">
-					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{buku_judul}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="79" y="20" width="132" height="20" forecolor="#000000" uuid="6e699e5e-f260-4c3f-8fe8-94c2cac85048"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Kategori]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="215" y="20" width="338" height="18" uuid="4b81f833-676a-41a3-8ac0-b76e3b23f10a"/>
-				<textElement textAlignment="Left">
-					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{buku_kategori}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="79" y="40" width="132" height="20" forecolor="#000000" uuid="bf19c457-00d0-4738-8a4b-face3713d418"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font isBold="true" isItalic="false" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Penerbit]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="215" y="40" width="338" height="18" uuid="947fb7b9-5d7d-4b47-96ab-b6c1a976cc7e"/>
-				<textElement textAlignment="Left">
-					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{buku_penerbit}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="79" y="60" width="132" height="20" forecolor="#000000" uuid="e80c1501-0510-4725-9868-48126940da51"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font isBold="true" isStrikeThrough="false"/>
-				</textElement>
-				<text><![CDATA[Stock Buku]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="215" y="60" width="338" height="18" uuid="00ea9925-ccf1-4f41-a39a-8639685eab93"/>
-				<textElement textAlignment="Left">
-					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{buku_stok}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="7" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="5d438fd6-6ff1-458b-a7e5-fcd84ebca786"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="13" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#007AFF" uuid="4d352078-f65e-4812-b97f-704c7b70c721"/>
-				<textField evaluationTime="Report">
-					<reportElement style="Column header" x="513" y="-1" width="40" height="13" forecolor="#FFFFFF" uuid="d77dcc2c-7e4f-45f6-9526-e09326048182"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Column header" x="433" y="-1" width="80" height="13" forecolor="#FFFFFF" uuid="afe1407e-6bd9-4303-bbf3-727027df8d41"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="6c16569d-cb6b-48b2-949c-75d0bc4c4191"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+            </image>
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="2" y="90" width="551" height="1" uuid="33830d65-7af5-4029-99b5-547512799fcc"/>
+            </line>
+            <staticText>
+                <reportElement style="Column header" positionType="Float" x="79" y="0" width="132" height="20" forecolor="#000000" uuid="e8b997f4-a21a-46a7-ac98-805436c59a8a"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font isBold="true" isStrikeThrough="false"/>
+                </textElement>
+                <text><![CDATA[Judul Buku]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement style="Detail" positionType="Float" x="215" y="0" width="338" height="18" uuid="0eb5e5fa-14b9-461e-b931-82db75c6fb3f"/>
+                <textElement textAlignment="Left">
+                    <font size="14" isBold="true" pdfFontName="Times-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{buku_judul}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Column header" positionType="Float" x="79" y="20" width="132" height="20" forecolor="#000000" uuid="6e699e5e-f260-4c3f-8fe8-94c2cac85048"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font isBold="true" isStrikeThrough="false"/>
+                </textElement>
+                <text><![CDATA[Kategori]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement style="Detail" positionType="Float" x="215" y="20" width="338" height="18" uuid="4b81f833-676a-41a3-8ac0-b76e3b23f10a"/>
+                <textElement textAlignment="Left">
+                    <font size="14" isBold="true" pdfFontName="Times-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{buku_kategori}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Column header" positionType="Float" x="79" y="40" width="132" height="20" forecolor="#000000" uuid="bf19c457-00d0-4738-8a4b-face3713d418"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font isBold="true" isItalic="false" isStrikeThrough="false"/>
+                </textElement>
+                <text><![CDATA[Penerbit]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement style="Detail" positionType="Float" x="215" y="40" width="338" height="18" uuid="947fb7b9-5d7d-4b47-96ab-b6c1a976cc7e"/>
+                <textElement textAlignment="Left">
+                    <font size="14" isBold="true" pdfFontName="Times-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{buku_penerbit}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Column header" positionType="Float" x="79" y="60" width="132" height="20" forecolor="#000000" uuid="e80c1501-0510-4725-9868-48126940da51"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font isBold="true" isStrikeThrough="false"/>
+                </textElement>
+                <text><![CDATA[Stock Buku]]></text>
+            </staticText>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement style="Detail" positionType="Float" x="215" y="60" width="338" height="18" uuid="00ea9925-ccf1-4f41-a39a-8639685eab93"/>
+                <textElement textAlignment="Left">
+                    <font size="14" isBold="true" pdfFontName="Times-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{buku_stok}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="7" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="5d438fd6-6ff1-458b-a7e5-fcd84ebca786"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="13" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="2" y="0" width="555" height="13" forecolor="#D0B48E" backcolor="#007AFF" uuid="4d352078-f65e-4812-b97f-704c7b70c721"/>
+                <textField evaluationTime="Report">
+                    <reportElement style="Column header" x="513" y="-1" width="40" height="13" forecolor="#FFFFFF" uuid="d77dcc2c-7e4f-45f6-9526-e09326048182"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement style="Column header" x="433" y="-1" width="80" height="13" forecolor="#FFFFFF" uuid="afe1407e-6bd9-4303-bbf3-727027df8d41"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+                </textField>
+                <textField pattern="EEEEE dd MMMMM yyyy">
+                    <reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="6c16569d-cb6b-48b2-949c-75d0bc4c4191"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
 </jasperReport>
